@@ -7,7 +7,7 @@ pages_build_output_dir = "dist"
 # Then paste the id below and set the same binding in the Pages dashboard.
 [[kv_namespaces]]
 binding = "WAITLIST"
-id = "PASTE_KV_ID_HERE"
+id = "a1eb848c5e4c4819a5af65e4c9a6bde0"
 
 [vars]
 NOTIFY_TO = "waitlist@agentsasfolders.ai"
