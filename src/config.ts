@@ -27,7 +27,7 @@ export const LINKS = {
 }
 
 export const NAV = [
-  { label: 'What', href: '/#what' },
+  { label: 'What', href: '/what-this-is/' },
   { label: 'ICM', href: '/icm' },
   { label: 'Hermes', href: '/hermes' },
   { label: 'Start', href: '/start' },
