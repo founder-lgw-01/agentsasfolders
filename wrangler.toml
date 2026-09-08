@@ -1,0 +1,18 @@
+name = "agentsasfolders"
+compatibility_date = "2026-09-01"
+pages_build_output_dir = "dist"
+
+# KV namespace for the waitlist.
+# Create it first:  wrangler kv namespace create WAITLIST
+# Then paste the id below and set the same binding in the Pages dashboard.
+[[kv_namespaces]]
+binding = "WAITLIST"
+id = "PASTE_KV_ID_HERE"
+
+[vars]
+NOTIFY_TO = "waitlist@agentsasfolders.ai"
+NOTIFY_FROM = "waitlist@agentsasfolders.ai"
+
+# Secrets, set these in the dashboard or with wrangler, never in this file:
+#   RESEND_KEY   optional. No key means no notification email, signups still store.
+#   EXPORT_KEY   any long random string. Guards the list export route.

@@ -1,0 +1,82 @@
+---
+import '../styles/global.css'
+import { SITE, NAV, LINKS } from '../config'
+
+const {
+  title,
+  description,
+  path = '',
+  ogType = 'website',
+} = Astro.props
+
+const canonical = new URL(path, SITE.domain).href
+const fullTitle = title === SITE.name ? title : `${title} · ${SITE.name}`
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#0d0f12" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${SITE.name} blog`}
+      href="/rss.xml"
+    />
+    <slot name="head" />
+  </head>
+
+  <body>
+    <header class="site-head">
+      <div class="wrap">
+        <a class="brand" href="/">~/<span>agents-as-folders</span></a>
+        <nav class="site-nav" aria-label="Main">
+          {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <p>
+          <strong style="color:var(--text)">{SITE.name}</strong> · {SITE.tagline}
+        </p>
+        <p>
+          <a href={LINKS.youtube}>YouTube</a> ·
+          <a href={SITE.blog}>Blog</a> ·
+          <a href="/icm">What is ICM</a> ·
+          <a href={LINKS.hermesGuide}>Hermes guide</a>
+        </p>
+        <p style="margin-bottom:0">
+          ICM was created by Jake van Clief. Some links on this site are
+          affiliate links and are marked where they appear.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

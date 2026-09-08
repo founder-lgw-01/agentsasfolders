@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro'
+import { LINKS } from '../config'
+---
+
+<Base
+  title="Hermes Agent"
+  description="Hermes is the agent that walks an ICM folder structure. What it is, why it pairs with folders, and where the full setup guide lives."
+  path="/hermes"
+>
+  <section>
+    <div class="wrap prose">
+      <span class="badge">Hermes Agent</span>
+      <h1>The agent that walks the folders</h1>
+      <p class="lede">
+        ICM gives you the structure. Hermes is what moves through it.
+      </p>
+
+      <h2>Why they go together</h2>
+      <p>
+        A folder structure on its own is just tidy. It becomes useful the moment
+        something reads it and acts. Hermes runs on your machine, reads the
+        folder you point it at, and does the job that folder describes.
+      </p>
+      <p>
+        It also connects out: Discord, Telegram, email, and scheduled jobs that
+        run without you sitting there. So the same folders that tell it how you
+        write can also be the thing that sends you a summary every morning.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>The full setup guide lives here:</strong>
+          <a href={LINKS.hermesGuide}>profiles.agentsasfolders.ai</a>. Keys,
+          logins, providers, tools, the whole configuration walkthrough. It is
+          the deep reference and it stays current.
+        </p>
+      </div>
+
+      <h2>What you need before you start</h2>
+      <ul>
+        <li>Hermes installed and running.</li>
+        <li>
+          A folder structure worth pointing it at. That is
+          <a href="/start">the 3 folder start</a>.
+        </li>
+        <li>One real file inside 1 of those folders. Not a prompt. A note.</li>
+      </ul>
+
+      <h2>The part people miss</h2>
+      <p>
+        You do not paste your context in. You do not build a giant instruction
+        block. You put a file in a folder and you point the agent at the folder.
+        The folder does the explaining.
+      </p>
+
+      <div class="btn-row">
+        <a class="btn" href={LINKS.hermesGuide}>Open the setup guide</a>
+        <a class="btn btn--ghost" href="/start">Build the folders first</a>
+      </div>
+    </div>
+  </section>
+</Base>

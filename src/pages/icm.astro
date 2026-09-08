@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro'
+import { LINKS } from '../config'
+---
+
+<Base
+  title="What is ICM"
+  description="Interpretable Context Methodology, explained for business owners instead of researchers. Folder structure as agent architecture, in plain words."
+  path="/icm"
+>
+  <section>
+    <div class="wrap prose">
+      <span class="badge badge--accent">Interpretable Context Methodology</span>
+      <h1>What ICM actually is</h1>
+      <p class="lede">
+        Folder structure as agent architecture. That is the 1 line version. Here
+        is the version you can use.
+      </p>
+
+      <h2>The idea</h2>
+      <p>
+        Instead of building a system to coordinate your AI, you arrange folders.
+        Numbered ones. Each folder holds 1 job and the context for that job. The
+        agent reads the folder it is standing in, and that is what tells it what
+        to do.
+      </p>
+      <p>
+        No framework. No orchestration tool. No code holding it together. The
+        folders are the structure, and plain text files are how everything
+        talks.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>Why it works:</strong> an AI does not browse your files
+          looking for what matters. It opens what you point it at. So the
+          arrangement of your folders is not housekeeping. It is the
+          instruction.
+        </p>
+      </div>
+
+      <h2>What it looks like</h2>
+      <pre class="tree"><b>01_research/</b>   <i>what you learned, and about who</i>
+<b>02_writing/</b>    <i>how you write, and what you sell</i>
+<b>03_publishing/</b> <i>where it goes, and the checks before it does</i></pre>
+      <p>
+        The numbers are the order the work happens in. Research comes before
+        writing, so research is 01. When you need a 4th thing, you add 04 and
+        nothing else has to move.
+      </p>
+
+      <h2>Why the old way stopped working</h2>
+      <p>
+        Most note systems die the same way. You set one up, capture everything
+        for a few weeks, and then the pile gets messy. Not untidy: unfindable.
+        You start searching instead of opening, search gives you a screen full
+        of results, and you read none of them. Then you stop trusting it, so you
+        stop opening it.
+      </p>
+      <p>
+        That happens because everything touched everything. 3 folders with 3
+        jobs cannot pile up the same way. Storage gets fuller. A brain gets
+        bigger.
+      </p>
+
+      <h2>Who made this</h2>
+      <p>
+        ICM was created by <strong>Jake van Clief</strong>. I did not invent it.
+        I use it, I teach it, and I build inside it. If you want the source
+        material rather than my explanation of it:
+      </p>
+      <ul>
+        <li><a href={LINKS.icmPaper}>The paper</a></li>
+        <li><a href={LINKS.icmRepo}>The reference implementation</a></li>
+      </ul>
+
+      <h2>Where to start</h2>
+      <p>
+        Do not read more about it. Make 3 folders and point your agent at 1 of
+        them.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="/start">The 3 folder start</a>
+        <a class="btn btn--ghost" href="/hermes">Run it with Hermes</a>
+      </div>
+    </div>
+  </section>
+</Base>

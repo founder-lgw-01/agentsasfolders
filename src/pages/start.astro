@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro'
+import Waitlist from '../components/Waitlist.astro'
+---
+
+<Base
+  title="Build 3 folders tonight"
+  description="The free 3 folder start. Make them, name them, put one real file inside, and point your AI at it. About 20 minutes."
+  path="/start"
+>
+  <section>
+    <div class="wrap prose">
+      <span class="badge badge--accent">Free, about 20 minutes</span>
+      <h1>Build 3 folders tonight</h1>
+      <p class="lede">
+        This is the whole starting move. No install, no account, no tool you do
+        not already have.
+      </p>
+
+      <h2>1. Make the folders</h2>
+      <p>Anywhere you like. Your desktop is fine. Name them exactly this:</p>
+      <pre class="tree"><b>01_research/</b>
+<b>02_writing/</b>
+<b>03_publishing/</b></pre>
+      <p>
+        The numbers matter. They are the order your work actually happens in,
+        and they keep the folders sorted in that order everywhere you look at
+        them.
+      </p>
+
+      <h2>2. Put 1 real file in 02</h2>
+      <p>
+        Call it <code>how-i-write.md</code>. Put your actual preferences in it.
+        Not a prompt. Not instructions to an AI. Just the truth, as you would
+        tell a new hire:
+      </p>
+      <pre class="tree"><i># How I write</i>
+
+Short sentences
+No exclamation marks
+Never sound excited about software
+Say the number or say I do not know</pre>
+      <p>
+        Yours will be different. That is the point. This file is worth more than
+        any prompt you have ever pasted, because it stays.
+      </p>
+
+      <h2>3. Point your AI at it</h2>
+      <p>
+        Open whatever you use. Ask it for something you would normally ask for,
+        and add 4 words:
+      </p>
+      <div class="callout">
+        <p>
+          Write me a post about pricing, <strong>using what is in 02</strong>
+        </p>
+      </div>
+      <p>
+        Same question you would have asked. Same model. Different answer,
+        because it read the folder it was standing in.
+      </p>
+
+      <h2>4. Then keep going</h2>
+      <p>
+        Add a file to 01 about who your customers actually are. Add one to 03
+        about where things get published and what you check first. Add an 04
+        when you need it. Nothing you already built has to move.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>If it does not work</strong>, the usual reason is the file is
+          written to an AI instead of about you. Rewrite it as notes for a
+          person and try again.
+        </p>
+      </div>
+
+      <hr />
+
+      <h2>When you want mine</h2>
+      <p>
+        I am putting my real setup, my actual folder structures, and my finished
+        builds into a VIP classroom. It is not open yet. Leave your email and
+        you will hear before anyone else.
+      </p>
+      <Waitlist id="start-waitlist" />
+    </div>
+  </section>
+</Base>

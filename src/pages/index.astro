@@ -1,0 +1,227 @@
+---
+import Base from '../layouts/Base.astro'
+import Waitlist from '../components/Waitlist.astro'
+import { BMC_LINK, LINKS, SITE } from '../config'
+---
+
+<Base
+  title={SITE.name}
+  description="Your AI forgets your business every morning. Not because you lack discipline. Because you built storage, not structure. Folders your agent can walk."
+  path="/"
+>
+  <section style="padding-bottom:1rem">
+    <div class="wrap">
+      <span class="badge">Interpretable Context Methodology</span>
+      <h1>Your AI asks who you are<br />every single morning</h1>
+      <p class="lede">
+        You explain your business. Your voice. Your customers. Again. You built
+        a second brain to stop doing this, and you are still doing this.
+      </p>
+      <p class="lede" style="color:var(--text)">
+        The problem is not your discipline. It is that you built storage, and
+        storage waits to be opened. A brain gets walked.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="/start">Build 3 folders tonight</a>
+        <a class="btn btn--ghost" href="/icm">What is ICM</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="what">
+    <div class="wrap">
+      <h2>An app is a place to put things</h2>
+      <p style="max-width:40rem">
+        Notion is good software. Obsidian is good software. Neither one failed
+        you. They are filing cabinets, and a filing cabinet is useful. It is
+        just not a brain.
+      </p>
+      <p style="max-width:40rem">
+        A brain gets walked. Something moves through it, picks up what it
+        needs, and knows where to go next. That something is your AI. And here
+        is the part nobody tells you: your AI does not browse. It does not get
+        curious. It opens what you point it at.
+      </p>
+      <p style="max-width:40rem">
+        So a beautiful vault means nothing to it if nothing tells it where to
+        stand. You built a room with no doors.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>The fix is not another app.</strong> It is 3 folders with 3
+          jobs, and an agent that reads the folder it is standing in.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="grid" style="align-items:start">
+        <div>
+          <h2 style="font-size:1.5rem">This is the whole idea</h2>
+          <p style="color:var(--muted)">
+            Numbered folders. Each one holds 1 job and the notes for that job.
+            Nothing else. The number is the order the work happens in, not
+            decoration.
+          </p>
+          <p style="color:var(--muted)">
+            Point your AI at <code
+              style="font-family:var(--mono);color:var(--accent)">02_writing</code
+            > and it already knows it is writing. Nobody had to explain that.
+          </p>
+        </div>
+        <pre class="tree"><b>~/my-business/</b>
+├── <b>01_research/</b>
+│   ├── <i>customers.md</i>
+│   └── <i>competitors.md</i>
+├── <b>02_writing/</b>
+│   ├── <i>how-i-write.md</i>
+│   └── <i>offers.md</i>
+└── <b>03_publishing/</b>
+    ├── <i>where-it-goes.md</i>
+    └── <i>checklist.md</i></pre>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <span class="badge">Free</span>
+      <h2>Start with the free material</h2>
+      <p class="lede">
+        No card, no trial, no upsell wall. This is the part that should work
+        before you pay anyone anything.
+      </p>
+      <div class="grid" style="margin-top:2rem">
+        <div class="card">
+          <h3>Hermes basics</h3>
+          <p style="color:var(--muted);margin:0">
+            Getting the agent running and pointed at a folder.
+          </p>
+        </div>
+        <div class="card">
+          <h3>ICM folder structures</h3>
+          <p style="color:var(--muted);margin:0">
+            How to number them, what goes inside, and when to add a 4th.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Automations</h3>
+          <p style="color:var(--muted);margin:0">
+            Cron jobs and scheduled work that runs without you watching.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Channels</h3>
+          <p style="color:var(--muted);margin:0">
+            Wiring it into Discord, Telegram and email.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="where">
+    <div class="wrap">
+      <span class="badge">Where I teach</span>
+      <h2>BuildMarketClose</h2>
+      <p style="max-width:40rem">
+        I am an admin in the BuildMarketClose community and I teach there. I am
+        also building my own material inside it, in the open, as proof that
+        their process works. If you want to watch that happen from the inside,
+        that is where it is happening.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href={BMC_LINK} rel="sponsored noopener">
+          Join BuildMarketClose
+        </a>
+      </div>
+      <p class="disclosure">
+        Heads up: that is an affiliate link. I earn a commission if you join
+        through it. I would point you there either way, because it is where I
+        teach, but you should know before you click.
+      </p>
+    </div>
+  </section>
+
+  <section id="vip">
+    <div class="wrap">
+      <span class="badge">Not open yet</span>
+      <h2>My VIP classroom</h2>
+      <p class="lede">
+        Still in draft. You cannot buy it today and I am not going to pretend
+        otherwise.
+      </p>
+      <p style="max-width:40rem">When it opens, it is where I put:</p>
+      <ul style="max-width:40rem;color:var(--muted)">
+        <li>My live Hermes setup. The real one, not a demo.</li>
+        <li>My actual ICM folder structures, as I use them.</li>
+        <li>Finished builds you can take and run.</li>
+        <li>
+          Request rights. You ask for a build, I make it, it lands in the
+          classroom.
+        </li>
+      </ul>
+      <p style="max-width:40rem">
+        The structured course material is being written now. It is not there
+        yet. If you want a finished library today, wait for me. If you want to
+        watch it get built and get in early, leave your email.
+      </p>
+      <Waitlist id="vip-waitlist" />
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Questions you are probably asking</h2>
+
+      <h3>Is the free stuff actually free?</h3>
+      <p style="max-width:40rem;color:var(--muted)">
+        Yes. No card, no trial that converts, no locked lesson 4. The paid thing
+        is separate and it is not open yet anyway.
+      </p>
+
+      <h3>What is the commission thing?</h3>
+      <p style="max-width:40rem;color:var(--muted)">
+        BuildMarketClose pays me if you join through my link. I teach there and
+        I would recommend it regardless, but you deserve to know the incentive
+        exists.
+      </p>
+
+      <h3>When does VIP open?</h3>
+      <p style="max-width:40rem;color:var(--muted)">
+        When the material is worth charging for. Leave your email and you will
+        hear before anyone else.
+      </p>
+
+      <h3>Do I need to know how to code?</h3>
+      <p style="max-width:40rem;color:var(--muted)">
+        No. If you can make a folder and name it, you can do this. That is most
+        of the point.
+      </p>
+
+      <h3>Is this just another second brain method?</h3>
+      <p style="max-width:40rem;color:var(--muted)">
+        Fair question. The difference is who it is built for. A second brain is
+        usually built for you to read. This is built for your agent to walk, and
+        that changes the shape of everything.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap" style="text-align:center">
+      <h2>Go make 3 folders tonight</h2>
+      <p class="lede" style="margin-inline:auto">
+        Number them. Give each one a job. Then point your AI at one of them and
+        watch it stop asking who you are.
+      </p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn" href="/start">Show me how</a>
+        <a class="btn btn--ghost" href={LINKS.youtube}>Watch on YouTube</a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro'
+import Waitlist from '../components/Waitlist.astro'
+import { BMC_LINK } from '../config'
+---
+
+<Base
+  title="VIP waitlist"
+  description="My VIP classroom is not open yet. Here is what goes in it, and how to hear the day it opens."
+  path="/vip"
+>
+  <section>
+    <div class="wrap prose">
+      <span class="badge">Not open yet</span>
+      <h1>The VIP classroom</h1>
+      <p class="lede">
+        It is in draft. You cannot buy it today, and I would rather say that
+        plainly than take your money for a room that is half built.
+      </p>
+
+      <h2>What goes in it</h2>
+      <ul>
+        <li>
+          <strong>My live setup.</strong> The real Hermes configuration I use
+          every day, not a clean demo version made for a video.
+        </li>
+        <li>
+          <strong>My actual folder structures.</strong> The ICM builds behind my
+          own work, including the ugly parts.
+        </li>
+        <li>
+          <strong>Finished builds.</strong> Take them, run them, change them.
+        </li>
+        <li>
+          <strong>Request rights.</strong> You ask for a build. I make it. It
+          lands in the classroom for everyone in there.
+        </li>
+      </ul>
+
+      <h2>What is not in it yet</h2>
+      <p>
+        Structured course material. I am writing it now. If you want a finished
+        library on day 1, you should wait for me rather than join early and feel
+        short changed.
+      </p>
+
+      <h2>The price</h2>
+      <p>
+        The plan is 29 dollars a month, and that is a founding price. It goes up
+        as the material fills in, and anyone who joins at 29 keeps 29 for as
+        long as they stay.
+      </p>
+      <p style="color:var(--muted)">
+        None of that is live yet, so there is nothing to click. The list below
+        is the only thing that does anything today.
+      </p>
+
+      <Waitlist id="vip-page-waitlist" />
+
+      <hr />
+
+      <h2>In the meantime</h2>
+      <p>
+        The free material is genuinely free and it is enough to get you running.
+        Start with <a href="/start">the 3 folder build</a>. If you want to see
+        where I teach, that is
+        <a href={BMC_LINK} rel="sponsored noopener">BuildMarketClose</a>.
+      </p>
+      <p class="disclosure">
+        That BuildMarketClose link is an affiliate link. I earn a commission if
+        you join through it.
+      </p>
+    </div>
+  </section>
+</Base>

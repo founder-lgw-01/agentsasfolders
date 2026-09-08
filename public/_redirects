@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects.
+# If blog.agentsasfolders.ai ever gets pointed at this project, send it home.
+https://blog.agentsasfolders.ai/* https://agentsasfolders.ai/blog/:splat 301

@@ -1,0 +1,111 @@
+---
+import Base from '../../layouts/Base.astro'
+import { getCollection } from 'astro:content'
+import { SITE } from '../../config'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true
+  )
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }))
+}
+
+const { post } = Astro.props
+const { Content } = await post.render()
+const d = post.data
+
+const fmt = (x) =>
+  x.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.title,
+  description: d.description,
+  datePublished: d.date.toISOString(),
+  ...(d.updated && { dateModified: d.updated.toISOString() }),
+  author: { '@type': 'Person', name: SITE.author },
+  publisher: { '@type': 'Organization', name: SITE.name },
+  mainEntityOfPage: new URL(`/blog/${post.slug}/`, SITE.domain).href,
+}
+
+const ytId = d.video?.match(/(?:v=|youtu\.be\/)([\w-]{11})/)?.[1]
+---
+
+<Base
+  title={d.title}
+  description={d.description}
+  path={`/blog/${post.slug}/`}
+  ogType="article"
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(ld)}
+  />
+
+  <section>
+    <article class="wrap prose">
+      {d.draft && (
+        <p class="disclosure" style="border-color:var(--accent)">
+          Draft. Not visible in the production build.
+        </p>
+      )}
+
+      <p
+        style="color:var(--muted);font-size:0.85rem;font-family:var(--mono);margin-bottom:0.75rem"
+      >
+        {fmt(d.date)}
+        {d.updated && ` · updated ${fmt(d.updated)}`}
+      </p>
+
+      <h1>{d.title}</h1>
+      <p class="lede">{d.description}</p>
+
+      {ytId && (
+        <div
+          style="position:relative;padding-top:56.25%;margin:2.5rem 0;border-radius:10px;overflow:hidden;border:1px solid var(--muted-dim)"
+        >
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${ytId}`}
+            title={d.title}
+            loading="lazy"
+            allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"
+            allowfullscreen
+            style="position:absolute;inset:0;width:100%;height:100%;border:0"
+          />
+        </div>
+      )}
+
+      <Content />
+
+      {d.sources && d.sources.length > 0 && (
+        <>
+          <hr />
+          <h2 style="font-size:1.1rem">Sources</h2>
+          <ul style="font-size:0.9rem;color:var(--muted)">
+            {d.sources.map((s) => (
+              <li><a href={s}>{s}</a></li>
+            ))}
+          </ul>
+        </>
+      )}
+
+      <hr />
+
+      <div class="callout">
+        <p>
+          <strong>Want the folders?</strong> The 3 folder start is free and it
+          takes about 20 minutes. <a href="/start">Build it</a>.
+        </p>
+      </div>
+    </article>
+  </section>
+</Base>
