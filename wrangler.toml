@@ -10,6 +10,7 @@ binding = "WAITLIST"
 id = "a1eb848c5e4c4819a5af65e4c9a6bde0"
 
 [vars]
+NODE_VERSION = "22"
 NOTIFY_TO = "waitlist@agentsasfolders.ai"
 NOTIFY_FROM = "waitlist@agentsasfolders.ai"
 
