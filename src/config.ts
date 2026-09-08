@@ -16,9 +16,13 @@ export const BMC_LINK =
 
 export const LINKS = {
   youtube: 'https://youtube.com/@AgentsAsFolders',
-  hermesGuide: 'https://profiles.agentsasfolders.ai',
+  // The profiles guide. A path now, not a subdomain. The page itself is a
+  // static file at public/profiles/index.html, kept whole and not rewritten.
+  // It sits FAR down the ladder: it assumes Hermes is already installed.
+  profiles: '/profiles/',
   icmPaper: 'https://arxiv.org/html/2603.16021v2',
   icmRepo: 'https://github.com/RinDig/Interpretable-Context-Methodology',
+  hermesDocs: 'https://hermes-agent.nousresearch.com/docs/user-guide/profiles',
   waitlistApi: '/api/waitlist',
 }
 

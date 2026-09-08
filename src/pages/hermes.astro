@@ -1,11 +1,53 @@
 ---
 import Base from '../layouts/Base.astro'
 import { LINKS } from '../config'
+
+// The ladder. Order matters: each rung assumes the one above it.
+// Add pages here as they get written. `ready: false` renders as
+// "coming soon" and does not link anywhere.
+const ladder = [
+  {
+    n: '01',
+    title: 'What Hermes is',
+    blurb: 'The agent that reads your folders and does the work in them.',
+    href: '#what',
+    ready: true,
+  },
+  {
+    n: '02',
+    title: 'Getting started',
+    blurb: 'Installing it and running it the first time.',
+    href: null,
+    ready: false,
+  },
+  {
+    n: '03',
+    title: 'Your first folder',
+    blurb: 'Pointing Hermes at something real and watching it read.',
+    href: '/start',
+    ready: true,
+  },
+  {
+    n: '04',
+    title: 'Channels and automations',
+    blurb: 'Discord, Telegram, email, and work that runs on a schedule.',
+    href: null,
+    ready: false,
+  },
+  {
+    n: '05',
+    title: 'Profiles',
+    blurb:
+      'Keeping separate setups apart so 1 agent does not bleed into another.',
+    href: LINKS.profiles,
+    ready: true,
+  },
+]
 ---
 
 <Base
   title="Hermes Agent"
-  description="Hermes is the agent that walks an ICM folder structure. What it is, why it pairs with folders, and where the full setup guide lives."
+  description="Hermes is the agent that walks an ICM folder structure. What it is, in plain words, and the order to learn it in."
   path="/hermes"
 >
   <section>
@@ -16,47 +58,87 @@ import { LINKS } from '../config'
         ICM gives you the structure. Hermes is what moves through it.
       </p>
 
-      <h2>Why they go together</h2>
+      <h2 id="what">What it actually is</h2>
       <p>
-        A folder structure on its own is just tidy. It becomes useful the moment
-        something reads it and acts. Hermes runs on your machine, reads the
-        folder you point it at, and does the job that folder describes.
+        Hermes is an agent that runs on your machine. You point it at a folder,
+        it reads what is in there, and it does the work that folder describes.
       </p>
       <p>
-        It also connects out: Discord, Telegram, email, and scheduled jobs that
-        run without you sitting there. So the same folders that tell it how you
-        write can also be the thing that sends you a summary every morning.
+        That is the part worth sitting with. You are not pasting context into a
+        chat window and hoping it sticks. The context lives in the folder, the
+        agent reads the folder, and the next time you ask for something it is
+        still there.
+      </p>
+      <p>
+        It also connects out to Discord, Telegram and email, and it can run work
+        on a schedule without you sitting there watching it.
       </p>
 
       <div class="callout">
         <p>
-          <strong>The full setup guide lives here:</strong>
-          <a href={LINKS.hermesGuide}>profiles.agentsasfolders.ai</a>. Keys,
-          logins, providers, tools, the whole configuration walkthrough. It is
-          the deep reference and it stays current.
+          <strong>You do not need Hermes to start.</strong> The folder structure
+          is the part that matters and you can build it tonight with nothing
+          installed. <a href="/start">Do that first</a>. Hermes is what you add
+          when you want the folders to actually do something on their own.
         </p>
       </div>
 
-      <h2>What you need before you start</h2>
-      <ul>
-        <li>Hermes installed and running.</li>
-        <li>
-          A folder structure worth pointing it at. That is
-          <a href="/start">the 3 folder start</a>.
-        </li>
-        <li>One real file inside 1 of those folders. Not a prompt. A note.</li>
-      </ul>
-
-      <h2>The part people miss</h2>
+      <h2>The order to learn it in</h2>
       <p>
-        You do not paste your context in. You do not build a giant instruction
-        block. You put a file in a folder and you point the agent at the folder.
-        The folder does the explaining.
+        Most guides drop you in the middle. This is the ladder, and each rung
+        assumes the one above it.
+      </p>
+
+      <div style="display:grid;gap:0.75rem;margin:2rem 0">
+        {
+          ladder.map((step) => (
+            <div
+              class="card"
+              style={`display:flex;gap:1.25rem;align-items:flex-start;${step.ready ? '' : 'opacity:0.55'}`}
+            >
+              <span
+                style="font-family:var(--mono);color:var(--accent);font-size:0.95rem;padding-top:0.15rem"
+              >
+                {step.n}
+              </span>
+              <div style="flex:1">
+                <h3 style="font-size:1.05rem;margin:0 0 0.25rem">
+                  {step.ready && step.href ? (
+                    <a href={step.href}>{step.title}</a>
+                  ) : (
+                    <span style="color:var(--muted)">{step.title}</span>
+                  )}
+                </h3>
+                <p style="color:var(--muted);margin:0;font-size:0.95rem">
+                  {step.blurb}
+                </p>
+              </div>
+              {!step.ready && (
+                <span
+                  class="badge"
+                  style="margin:0;font-size:0.6rem;white-space:nowrap"
+                >
+                  Being written
+                </span>
+              )}
+            </div>
+          ))
+        }
+      </div>
+
+      <h2>A word about step 05</h2>
+      <p>
+        The profiles guide is thorough and it is worth reading, but it is
+        further down this list for a reason. It assumes Hermes is installed and
+        that you already know what a profile is. If you landed here from a video
+        about second brains, start at the top instead.
       </p>
 
       <div class="btn-row">
-        <a class="btn" href={LINKS.hermesGuide}>Open the setup guide</a>
-        <a class="btn btn--ghost" href="/start">Build the folders first</a>
+        <a class="btn" href="/start">Build 3 folders first</a>
+        <a class="btn btn--ghost" href={LINKS.profiles}>
+          I have Hermes, take me to profiles
+        </a>
       </div>
     </div>
   </section>

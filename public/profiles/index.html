@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hermes Agent Profiles — Setup and SOUL.md Guide</title>
+<meta name="description" content="Learn how Hermes Agent profiles isolate state, when to use them, how to set one up, and how to prompt for a profile-specific SOUL.md without mixing agents.">
+<meta name="keywords" content="Hermes Agent profiles, multiple Hermes agents, SOUL.md, Hermes profile setup">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0f0f18;          /* Nous page background */
+  --bg-deep:#07070d;     /* deeper ground */
+  --surface:#16161f;     /* card surface */
+  --surface-2:#1b1b26;   /* alt surface */
+  --code:#0a0a12;        /* code block bg */
+  --gold:#ffd700;        /* accent */
+  --gold-hover:#ffbf00;  /* accent hover */
+  --gold-ink:#e6c200;    /* accent dark */
+  --text:#f1efe8;        /* warm white */
+  --muted:#b8b8c2;       /* readable muted */
+  --hairline:rgba(255,215,0,.10);
+  --hairline-strong:rgba(255,215,0,.22);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:17px/1.68 "DM Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+/* subtle Nous gold dot-grid texture */
+.main{
+  background-image:radial-gradient(rgba(255,215,0,.05) 1px, transparent 1px);
+  background-size:32px 32px;
+}
+a{color:var(--gold);text-decoration:none}
+a:hover{color:var(--gold-hover);text-decoration:underline}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* ===== nav ===== */
+nav.top{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:18px;
+  padding:12px 28px;
+  background:rgba(15,15,24,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--hairline);
+}
+nav.top .brand{
+  font:700 15px "JetBrains Mono",ui-monospace,monospace;
+  letter-spacing:.02em;white-space:nowrap;
+}
+nav.top .brand .gold{color:var(--gold)}
+nav.top .links{display:flex;flex-wrap:wrap;gap:4px 14px;margin-left:auto}
+nav.top .links a{font-size:13.5px;color:var(--muted);padding:4px 2px}
+nav.top .links a:hover{color:var(--gold);text-decoration:none}
+nav.top .links a.cta{
+  color:var(--bg);background:var(--gold);border-radius:999px;
+  padding:6px 14px;font-weight:700;font-size:13.5px;
+}
+nav.top .links a.cta:hover{background:var(--gold-hover);text-decoration:none}
+@media(max-width:900px){
+  nav.top{flex-wrap:wrap;gap:8px}
+  nav.top .brand{width:100%}
+  nav.top .links{margin-left:0;width:100%}
+}
+
+/* ===== layout ===== */
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px}
+section{padding:64px 0 8px;scroll-margin-top:76px}
+h1,h2,h3{line-height:1.18;letter-spacing:-.02em}
+h1{font-size:clamp(2.1rem,5vw,3.4rem);margin:0 0 18px;font-weight:700}
+h2{
+  font-size:clamp(1.5rem,3vw,2rem);margin:0 0 20px;font-weight:700;
+  padding-top:22px;border-top:1px solid var(--hairline-strong);
+}
+h3{font-size:1.25rem;margin:30px 0 12px;color:var(--gold-hover)}
+p,li{max-width:76ch}
+strong{color:#fff}
+.muted{color:var(--muted)}
+.gold{color:var(--gold)}
+sup a{font-size:.72em;vertical-align:super;color:var(--gold);text-decoration:none}
+sup a:hover{color:var(--gold-hover);text-decoration:underline}
+
+/* ===== hero ===== */
+.hero{padding:72px 0 20px}
+.hero .kicker{
+  display:inline-block;font:600 12.5px "JetBrains Mono",ui-monospace,monospace;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+  border:1px solid var(--hairline-strong);border-radius:999px;
+  padding:6px 14px;margin-bottom:22px;
+}
+.hero h1 .accent{color:var(--gold)}
+.hero .lede{font-size:1.2rem;color:var(--muted);max-width:60ch;margin:0 0 14px}
+.hero .enemy{
+  font-size:1rem;color:var(--text);background:var(--surface);
+  border-left:3px solid var(--gold);border-radius:0 var(--radius) var(--radius) 0;
+  padding:14px 18px;max-width:66ch;
+}
+.hero .enemy strong{color:var(--gold-hover)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 8px}
+.btn{
+  display:inline-block;font-weight:700;font-size:15.5px;border-radius:999px;
+  padding:11px 22px;text-decoration:none;
+}
+.btn.primary{background:var(--gold);color:var(--bg)}
+.btn.primary:hover{background:var(--gold-hover);color:var(--bg);text-decoration:none}
+.btn.secondary{color:var(--gold);border:1px solid var(--hairline-strong)}
+.btn.secondary:hover{color:var(--gold-hover);border-color:var(--gold);text-decoration:none}
+
+/* ===== folder tree hero ===== */
+.tree-card{
+  margin:34px 0 8px;background:var(--code);
+  border:1px solid var(--hairline);border-radius:var(--radius);
+  overflow-x:auto;
+}
+.tree-card .tree-label{
+  display:block;padding:12px 20px 0;font:600 12px "JetBrains Mono",monospace;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.tree{font:500 14px/1.75 "JetBrains Mono",ui-monospace,SFMono-Regular,monospace;padding:6px 20px 18px;min-width:640px}
+.tree .root{color:var(--text);font-weight:700}
+.tree .root .gold{color:var(--gold)}
+.tree .dir{color:var(--gold-hover)}
+.tree .file{color:var(--text)}
+.tree .note{color:var(--muted);font-style:italic}
+.tree .active{color:var(--gold);font-weight:700}
+.tree details{border-left:none}
+.tree summary{
+  cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px;
+}
+.tree summary::-webkit-details-marker{display:none}
+.tree summary::before{content:"▸";color:var(--gold);display:inline-block;width:1em;transition:transform .18s ease}
+.tree details[open]>summary::before{transform:rotate(90deg)}
+.tree .depth{padding-left:1.4em}
+
+/* ===== components ===== */
+.callout{
+  border:1px solid var(--hairline-strong);border-left:3px solid var(--gold);
+  background:var(--surface);border-radius:0 var(--radius) var(--radius) 0;
+  padding:16px 20px;margin:26px 0;
+}
+.callout.warn{border-left-color:var(--gold);background:#262615}
+.callout .tag{
+  display:block;font:700 12px "JetBrains Mono",monospace;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:6px;
+}
+pre{
+  overflow-x:auto;padding:18px 20px;border:1px solid var(--hairline);border-radius:var(--radius);
+  background:var(--code);font:14px/1.6 "JetBrains Mono",ui-monospace,SFMono-Regular,monospace;
+}
+code{font-family:"JetBrains Mono",ui-monospace,SFMono-Regular,monospace;font-size:.9em}
+p code,li code,td code{
+  color:var(--gold-hover);background:var(--code);border:1px solid var(--hairline);
+  border-radius:6px;padding:.1em .4em;
+}
+pre code{color:#bff4f0}
+table{width:100%;border-collapse:collapse;margin:20px 0 30px;font-size:15px}
+th,td{min-width:150px;padding:12px 14px;border:1px solid var(--hairline);text-align:left;vertical-align:top}
+th{background:var(--surface-2);color:var(--text);font-weight:700}
+td{background:rgba(22,22,31,.7)}
+tbody tr:hover td{background:var(--surface-2)}
+figure{margin:30px 0;padding:0}
+figure img{
+  display:block;width:100%;height:auto;border:1px solid var(--hairline);border-radius:var(--radius);
+  background:var(--code);
+}
+figure figcaption{font-size:13.5px;color:var(--muted);margin-top:8px}
+ul,ol{padding-left:1.35rem}
+li{margin:.35rem 0}
+ol.steps>li{margin:.9rem 0}
+hr{border:0;border-top:1px solid var(--hairline-strong);margin:52px 0}
+
+/* ===== footer ===== */
+footer{margin-top:80px;padding:34px 28px 60px;border-top:1px solid var(--hairline)}
+footer .wrap{max-width:1040px;margin:0 auto;color:var(--muted);font-size:14px}
+footer .sources{font-size:13.5px}
+footer .sources ol{padding-left:1.4rem}
+footer .sources li{margin:.4rem 0;overflow-wrap:anywhere}
+footer .sources a{color:var(--gold)}
+
+/* ===== responsive ===== */
+@media(max-width:720px){
+  body{font-size:16px}
+  .wrap{padding:0 18px}
+  .hero{padding:52px 0 12px}
+  section{padding:48px 0 6px}
+  th,td{min-width:132px;padding:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .tree summary::before{transition:none}
+  *{animation:none!important;transition:none!important}
+}
+</style>
+<link rel="canonical" href="https://agentsasfolders.ai/profiles/">
+</head>
+<body>
+<nav class="top" aria-label="Sections">
+  <div class="brand">~/.hermes<span class="gold">/profiles</span></div>
+  <div class="links">
+    <a href="#what-is">What</a>
+    <a href="#sandbox">Boundary</a>
+    <a href="#when">When</a>
+    <a href="#layers">Layers</a>
+    <a href="#create">Create</a>
+    <a href="#soul">SOUL.md</a>
+    <a href="#operate">Operate</a>
+    <a href="#faq">FAQ</a>
+    <a class="cta" href="#create">Create your first profile</a>
+  </div>
+</nav>
+
+<div class="main">
+<div class="wrap">
+
+  <header class="hero" id="top">
+    <span class="kicker">Hermes Agent Guide</span>
+    <h1>How to use Hermes Agent profiles <span class="accent">without mixing agents</span></h1>
+    <p class="lede">A Hermes profile keeps an agent&rsquo;s data in its own <code>HERMES_HOME</code>: configuration, credentials, memory, sessions, skills, cron jobs, and gateway state. Create one when that data must stay separate across chats.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+    <p class="enemy"><strong>The problem:</strong> two agents sharing one home directory overwrite each other&rsquo;s memory, identity, and keys. A profile gives each agent its own folder of state &mdash; so one specialist can exist without touching the others.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#create">Create your first profile</a>
+      <a class="btn secondary" href="#soul">Get the SOUL Builder prompt</a>
+      <a class="btn secondary" href="#cheatsheet">Command cheat sheet</a>
+    </div>
+
+    <div class="tree-card">
+      <span class="tree-label">A profile is a folder of state &mdash; one agent, one home</span>
+      <div class="tree" role="tree" aria-label="Profile isolation folder tree">
+        <div class="root">~/.hermes/<span class="gold">&nbsp;&#x2190; default profile (HERMES_HOME)</span></div>
+        <div class="file">&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; config.yaml</div>
+        <div class="file">&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; SOUL.md</div>
+        <div class="file">&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; .env</div>
+        <div class="file">&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; memories/</div>
+        <div class="file">&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; sessions/</div>
+        <div class="file">&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; skills/</div>
+        <div class="file">&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; cron/</div>
+        <div class="dir">&nbsp;&nbsp;&#x2514;&#x2500;&#x2500; profiles/</div>
+        <div class="depth">
+          <details open>
+            <summary class="active">&#x251C;&#x2500;&#x2500; content/ <span class="note">&nbsp;&#x2190; a second, isolated profile</span></summary>
+            <div class="file">&nbsp;&nbsp;&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; config.yaml</div>
+            <div class="file">&nbsp;&nbsp;&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; SOUL.md</div>
+            <div class="file">&nbsp;&nbsp;&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; memories/</div>
+            <div class="file">&nbsp;&nbsp;&nbsp;&nbsp;&#x2514;&#x2500;&#x2500; sessions/</div>
+          </details>
+          <details>
+            <summary>&#x2514;&#x2500;&#x2500; research/ <span class="note">&nbsp;&#x2190; a third</span></summary>
+            <div class="file">&nbsp;&nbsp;&nbsp;&nbsp;&#x251C;&#x2500;&#x2500; config.yaml</div>
+            <div class="file">&nbsp;&nbsp;&nbsp;&nbsp;&#x2514;&#x2500;&#x2500; SOUL.md</div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ 2. What is a profile ============ -->
+  <section id="what-is">
+    <h2>What is a Hermes Agent profile?</h2>
+    <p>A profile is a complete, separate <code>HERMES_HOME</code>. The default profile normally lives at <code>~/.hermes</code>; named profiles normally live under <code>~/.hermes/profiles/&lt;name&gt;</code>. Hermes resolves profile-scoped state from that home directory, so each profile can behave like a different agent on the same machine.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+    <p>A profile can have its own:</p>
+    <table>
+      <thead><tr><th>Profile component</th><th>What it controls</th></tr></thead>
+      <tbody>
+        <tr><td><code>config.yaml</code></td><td>Model, provider, tools, terminal, memory, gateway, and other settings</td></tr>
+        <tr><td><code>.env</code></td><td>API keys, bot tokens, and profile-specific environment values</td></tr>
+        <tr><td><code>SOUL.md</code></td><td>Durable agent identity, voice, and behavioral defaults</td></tr>
+        <tr><td><code>memories/</code></td><td>Persistent user facts and agent notes</td></tr>
+        <tr><td><code>sessions/</code></td><td>Conversation history and resumable sessions</td></tr>
+        <tr><td><code>skills/</code></td><td>Procedures and specialist capabilities available to that profile</td></tr>
+        <tr><td><code>cron/</code></td><td>Scheduled jobs owned by that profile</td></tr>
+        <tr><td>Gateway state</td><td>Messaging connections, process state, logs, and related data</td></tr>
+      </tbody>
+    </table>
+    <p>Profiles namespace the Hermes state each agent loads automatically. They do not stop an agent or tool running as the same operating-system user from reading another profile&rsquo;s files. Do not run two agent processes against the same profile: both can write memory and other profile state, so their changes can overwrite or mix.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+
+    <figure>
+      <img src="assets/01-profile-isolation.svg" alt="Diagram showing one Hermes installation with isolated default, coding, and content profiles" width="1200" height="760">
+      <figcaption>One install. Separate agent homes. A profile changes the Hermes state boundary by selecting a different HERMES_HOME.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 3. Not a sandbox ============ -->
+  <section id="sandbox">
+    <h2>A profile is not a filesystem sandbox</h2>
+    <p>Profiles separate the Hermes data that normally loads for an agent. They do not automatically restrict the folders that agent can access. On the normal local terminal backend, profiles also use the operating-system user&rsquo;s regular home directory for external command-line tools unless you configure a different terminal home mode.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+    <ul>
+      <li>Use a <strong>profile</strong> to separate normal Hermes configuration, memory, and profile <code>.env</code> loading.</li>
+      <li>Use <code>terminal.cwd</code> to choose where terminal commands begin.</li>
+      <li>Use a proper sandbox or restricted terminal backend when you need enforced filesystem limits.</li>
+      <li>For a confidentiality boundary, also use separate OS accounts, containers or sandboxes, restricted tools, and separately scoped external credentials.</li>
+    </ul>
+    <p><code>terminal.home_mode: profile</code> changes <code>HOME</code> only for tool subprocesses. You must initialize or deliberately link the profile&rsquo;s SSH, Git, GitHub CLI, cloud CLI, npm, and similar state under <code>$HERMES_HOME/home</code>. It does not prevent access to paths outside that home or remove credentials inherited through the process environment.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+    <div class="callout warn">
+      <span class="tag">Honest boundary</span>
+      <p>Profiles are state boundaries, not filesystem sandboxes. If you need enforced isolation, configure the terminal backend and access controls that enforce the boundary you need &mdash; a profile alone will not stop an agent from reading files elsewhere on the machine.</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. When to create ============ -->
+  <section id="when">
+    <h2>When to create a profile</h2>
+    <p>Use a profile when identity, memory, credentials, or tools must remain separate after a chat or restart.</p>
+    <p>Common cases include:</p>
+    <ul>
+      <li>separating the Hermes data that work, personal, or client agents load by default;</li>
+      <li>giving specialist or public-facing agents their own tools and credentials;</li>
+      <li>testing new models, plugins, or prompts before adding them to a primary agent; and</li>
+      <li>running messaging bots through separate gateways.<sup><a href="#sources" aria-label="Sources 1 and 3">[1][3]</a></sup></li>
+    </ul>
+    <p>Profiles can also use different models and budgets.</p>
+
+    <figure>
+      <img src="assets/02-should-you-create-a-profile.svg" alt="Decision tree for choosing a profile, project context file, sandbox, or new chat" width="1200" height="760">
+      <figcaption>Decide between a new session, a project context file, a profile, or a sandbox.</figcaption>
+    </figure>
+
+    <h3>When a profile is unnecessary</h3>
+    <p>Do not create a profile just to rename a chat. A profile adds durable state and configuration, which is useful only when that boundary matters.</p>
+    <table>
+      <thead><tr><th>What changed?</th><th>Use this</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Only the conversation topic</td><td>New session</td><td>You want fresh conversational context, not a new agent</td></tr>
+        <tr><td>Only one project&rsquo;s commands or conventions</td><td><code>AGENTS.md</code> or <code>.hermes.md</code></td><td>Project instructions belong with the project<sup><a href="#sources" aria-label="Source 6">[6]</a></sup></td></tr>
+        <tr><td>Only the temporary speaking style</td><td><code>/personality</code></td><td>A personality preset is a session-level overlay; <code>SOUL.md</code> is the durable baseline<sup><a href="#sources" aria-label="Source 8">[8]</a></sup></td></tr>
+        <tr><td>Identity, memory, model, skills, keys, or bot connection</td><td>Profile</td><td>These are durable agent-level differences</td></tr>
+        <tr><td>Enforced filesystem or process restrictions</td><td>Sandbox or restricted backend</td><td>A profile does not enforce that boundary<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 5. Layers ============ -->
+  <section id="layers">
+    <h2>Profiles, projects, and sessions are different layers</h2>
+    <p>A session is one conversation. A project context file tells Hermes how to work in a particular repository or folder. A profile defines the durable agent that enters those sessions and projects.</p>
+
+    <figure>
+      <img src="assets/04-profile-project-session.svg" alt="Comparison of a profile, project context, and session" width="1200" height="760">
+      <figcaption>Three layers: the profile (who the agent is), the project context (how to work here), the session (what we&rsquo;re discussing now).</figcaption>
+    </figure>
+
+    <p>A useful shorthand:</p>
+    <ul>
+      <li><code>SOUL.md</code> says <strong>who the agent is</strong>.</li>
+      <li><code>USER.md</code> says <strong>who the user is</strong>.</li>
+      <li><code>MEMORY.md</code> records <strong>what the agent has learned</strong>.</li>
+      <li><code>AGENTS.md</code> or <code>.hermes.md</code> says <strong>what this project needs</strong>.</li>
+      <li>The current session contains <strong>what you are discussing now</strong>.<sup><a href="#sources" aria-label="Source 6">[6]</a></sup></li>
+    </ul>
+    <p>Hermes loads memory when a session starts. Changes saved during that session persist to disk, but the system prompt does not receive the updated memory block until a new session begins.<sup><a href="#sources" aria-label="Source 6">[6]</a></sup></p>
+  </section>
+
+  <!-- ============ 6. Create ============ -->
+  <section id="create">
+    <h2>Create a profile</h2>
+    <p>This guide assumes Hermes is installed and that either the <code>hermes</code> command or Hermes Desktop is working. Decide three things before creating the profile:</p>
+    <ol>
+      <li>A short name for the agent&rsquo;s role.</li>
+      <li>Whether it should begin blank or inherit an existing setup.</li>
+      <li>Which credentials, project folder, tools, and external services it genuinely needs.</li>
+    </ol>
+    <p>If you plan to clone an existing profile, review whether copying its <code>.env</code> is acceptable before running the command.</p>
+
+    <h3>Choose how to create the profile</h3>
+    <p>You can start with a blank profile, copy configuration only, or copy configuration plus memories, cron jobs, and plugins. Choose before you run setup because the clone options can copy credentials you may not want.</p>
+    <table>
+      <thead><tr><th>Starting method</th><th>Command</th><th>What it does</th><th>Best use</th></tr></thead>
+      <tbody>
+        <tr><td>Blank</td><td><code>hermes profile create content</code></td><td>Creates a fresh profile and seeds bundled skills</td><td>A genuinely new agent</td></tr>
+        <tr><td>Clone configuration</td><td><code>hermes profile create content --clone</code></td><td>Copies <code>config.yaml</code>, <code>.env</code>, <code>SOUL.md</code>, and skills; memory and sessions start fresh</td><td>Same technical setup, new identity or workstream</td></tr>
+        <tr><td>Clone everything practical</td><td><code>hermes profile create content --clone-all</code></td><td>Also copies memories, cron jobs, and plugins; excludes profile history such as sessions and the state database</td><td>A working snapshot that does not need old transcript history</td></tr>
+        <tr><td>Clone a named source</td><td><code>hermes profile create content --clone-from researcher</code></td><td>Copies from a chosen profile instead of the current one</td><td>Building a new specialist from a known base</td></tr>
+      </tbody>
+    </table>
+    <p>Both <code>--clone</code> and <code>--clone-all</code> copy <code>.env</code>, so either method may duplicate API keys and bot tokens. Review the new profile&rsquo;s credentials before using it. <code>--clone-all</code> still excludes per-profile history; use export or backup when history must be preserved.<sup><a href="#sources" aria-label="Sources 1 and 2">[1][2]</a></sup></p>
+    <p>Advanced users can add <code>--no-skills</code> to create a narrow profile without the bundled skill set. That option cannot be combined with a clone operation.<sup><a href="#sources" aria-label="Source 2">[2]</a></sup></p>
+
+    <h3>Set up a profile from the CLI</h3>
+    <ol class="steps">
+      <li><strong>Choose a clear name and role.</strong> Use a short profile name made from letters, numbers, hyphens, or underscores. Describe the work rather than choosing a vague label.
+        <pre><code>hermes profile create content \
+  --description "Drafts, edits, and repurposes sourced marketing content."</code></pre>
+        <p>The description is stored in <code>profile.yaml</code> and is used by Hermes&rsquo;s kanban orchestrator to route work by role rather than profile name. You can add or replace it later:<sup><a href="#sources" aria-label="Source 2">[2]</a></sup></p>
+        <pre><code>hermes profile describe content \
+  --text "Drafts, edits, and repurposes sourced marketing content."</code></pre>
+      </li>
+      <li><strong>Run setup for that profile.</strong> Every named profile normally gets a command alias. The alias sets the correct <code>HERMES_HOME</code> before running Hermes.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup>
+        <pre><code>content setup --portal</code></pre>
+        <p>If you do not use Nous Portal, run the normal setup flow:</p>
+        <pre><code>content setup</code></pre>
+      </li>
+      <li><strong>Set profile-specific options.</strong> Use the alias so you can see which profile receives the change.
+        <pre><code>content config set model.default provider/model-name
+content config set terminal.cwd /absolute/path/to/content-workspace
+content skills list</code></pre>
+        <p>Creating a profile does not make the profile directory the terminal&rsquo;s working directory. Set <code>terminal.cwd</code> explicitly when the agent should start in a particular project.<sup><a href="#sources" aria-label="Sources 1 and 2">[1][2]</a></sup></p>
+      </li>
+      <li><strong>Create the profile&rsquo;s <code>SOUL.md</code>.</strong> The next section provides a prompt that interviews you and drafts the file. Review the result before saving it.</li>
+      <li><strong>Verify before adding sensitive work.</strong>
+        <pre><code>hermes profile list
+hermes profile show content
+content doctor
+content chat</code></pre>
+        <p><code>hermes profile show content</code> reports the profile home, model, gateway status, skill count, and whether important configuration files exist. It reports the Hermes home, not the terminal working directory.<sup><a href="#sources" aria-label="Source 2">[2]</a></sup></p>
+        <p>In the first chat, ask:</p>
+        <pre><code>State your role, your durable operating boundaries, and the profile name you are running under. Do not infer details you cannot verify.</code></pre>
+        <p>The reply checks only what the agent says. Confirm the active profile with <code>hermes profile show</code>, inspect its configuration, and test any tool restrictions directly.<sup><a href="#sources" aria-label="Source 2">[2]</a></sup></p>
+      </li>
+    </ol>
+
+    <h3>Create a profile in Hermes Desktop</h3>
+    <p>In Bot Mode, open the Bots roster, create an agent, and enter its name, title, and description. Advanced settings control its model, <code>SOUL.md</code>, skills, toolsets, and MCP servers.<sup><a href="#sources" aria-label="Source 5">[5]</a></sup></p>
+    <p>With multiple profiles, each settings page shows an <strong>Applies to</strong> selector. Check it before making changes. Switching the active profile resets the selector.<sup><a href="#sources" aria-label="Source 5">[5]</a></sup></p>
+    <p>The CLI and Desktop use the same Hermes core and profile state. You can create or inspect a profile in one interface and continue in the other.<sup><a href="#sources" aria-label="Source 5">[5]</a></sup></p>
+
+    <figure>
+      <img src="assets/03-profile-setup-flow.svg" alt="Flowchart for defining, creating, configuring, and verifying a profile" width="1200" height="760">
+      <figcaption>The setup flow: name it, create it, configure it, verify it &mdash; then connect services.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 7. SOUL.md ============ -->
+  <section id="soul">
+    <h2>Write a <code>SOUL.md</code> for a profile</h2>
+    <p><code>SOUL.md</code> defines the profile&rsquo;s default identity and behavior. Hermes loads it from that profile&rsquo;s <code>HERMES_HOME</code> when a session starts. Put long-lived voice, communication, and decision rules there; keep repository paths, ports, and commands in <code>AGENTS.md</code>.<sup><a href="#sources" aria-label="Sources 7 and 8">[7][8]</a></sup></p>
+
+    <h3>What belongs in the file?</h3>
+    <table>
+      <thead><tr><th>Put in <code>SOUL.md</code></th><th>Put somewhere else</th></tr></thead>
+      <tbody>
+        <tr><td>Identity and role</td><td>A task that ends this week</td></tr>
+        <tr><td>Audience and working relationship</td><td>Repository paths and architecture</td></tr>
+        <tr><td>Tone and communication style</td><td>Commands, ports, and deployment notes</td></tr>
+        <tr><td>Default level of detail</td><td>A single campaign brief</td></tr>
+        <tr><td>How to handle uncertainty</td><td>User facts that belong in persistent memory</td></tr>
+        <tr><td>Approval gates for consequential actions</td><td>Secrets and API keys</td></tr>
+        <tr><td>Behaviors to avoid</td><td>Temporary style changes better handled by <code>/personality</code></td></tr>
+      </tbody>
+    </table>
+    <p>Include only rules that should apply across many sessions and would change the agent&rsquo;s behavior. Leave one-off tasks and project details elsewhere.<sup><a href="#sources" aria-label="Source 7">[7]</a></sup></p>
+
+    <h3>Copy and paste this SOUL Builder prompt</h3>
+    <div class="callout warn">
+      <span class="tag">Safety note</span>
+      <p><strong>SOUL.md is not access control.</strong> Approval rules in the file guide the agent but do not enforce permissions. Use Hermes Safety and approval controls, restricted toolsets, terminal backends, and operating-system permissions for consequential actions. Test with mock or dry-run actions, never a real publish, send, purchase, deletion, or production change.<sup><a href="#sources" aria-label="Sources 7 and 8">[7][8]</a></sup></p>
+    </div>
+    <p>Start a chat inside the new profile first:</p>
+    <pre><code>content chat</code></pre>
+    <p>Then paste this prompt:</p>
+    <pre><code>Help me draft the SOUL.md for this Hermes profile.
+
+Profile name: [PROFILE NAME]
+Initial role: [ONE-SENTENCE ROLE]
+
+Do not write or replace a file yet.
+
+Ask no more than four questions at a time. Cover:
+- the agent's mission, audience, and work that is in or out of scope
+- its voice, directness, and normal answer length
+- when it should ask a question, make an assumption, or flag uncertainty
+- its tool and data boundaries, including actions that need approval
+- phrases, habits, and failure modes it should avoid
+
+If an answer belongs in AGENTS.md, a campaign brief, memory, credentials,
+or a temporary /personality preset, identify it and leave it out of SOUL.md.
+
+After the interview, summarize any unresolved decisions and draft a compact
+SOUL.md. Show me the draft and wait for approval. After I approve it, state
+the exact target path and ask again before writing the file.
+
+Do not publish, send, post, share, delete, purchase, or change an external
+system during this process.</code></pre>
+    <p>This creates two approval points: one for the draft and one for the target file.</p>
+
+    <figure>
+      <img src="assets/05-soul-builder-loop.svg" alt="Loop showing how to prompt, interview, review, save, test, and refine a SOUL.md" width="1200" height="760">
+      <figcaption>The SOUL Builder loop: prompt, interview, review, save, test, refine.</figcaption>
+    </figure>
+
+    <h3>Review the draft before saving it</h3>
+    <ul>
+      <li>Does the first paragraph say who the agent is in plain language?</li>
+      <li>Is the intended user or audience clear?</li>
+      <li>Are the boundaries durable, or are temporary tasks mixed in?</li>
+      <li>Does the file say how to handle uncertain or unsupported claims?</li>
+      <li>Are approval gates explicit for publishing, sending, deleting, purchasing, or changing external systems?</li>
+      <li>Are project-specific commands and paths kept out?</li>
+      <li>Do any instructions contradict one another?</li>
+      <li>Is the file short enough to read and edit without hunting for the important rules?</li>
+    </ul>
+
+    <h3>Example SOUL.md for a content profile</h3>
+    <p>Use this as a model, not as a universal template:</p>
+    <pre><code># Identity
+
+You are a focused content strategy and production assistant.
+
+# Mission
+
+Help the user research audiences, plan useful content, write grounded drafts,
+and repurpose approved material without inventing proof or claims.
+
+# Scope
+
+You may research, outline, draft, edit, and prepare campaign assets. Keep drafts
+editable and preserve links to the sources behind factual claims.
+
+Do not publish, send, post, share, delete, purchase, or change an external
+system without explicit human approval.
+
+# Working style
+
+Start with the answer or useful next step. Use plain language, short paragraphs,
+and specific examples. Ask questions only when the missing answer would change
+the work materially. Otherwise, state the assumption and proceed.
+
+# Evidence and uncertainty
+
+Do not invent statistics, testimonials, customer results, pricing, scarcity,
+or product capabilities. Cite factual claims when a reader may want to check
+them. Say what is uncertain and what still needs verification.
+
+# Approval gates
+
+The user is the final approval gate for public-facing content and external
+actions. Present the draft, note unresolved claims or missing assets, and wait
+for approval before publication or distribution.
+
+# Avoid
+
+Avoid hype, vague authority claims, padded introductions, fake urgency, and
+confident language unsupported by evidence.</code></pre>
+
+    <h3>Save the approved file to the correct profile</h3>
+    <p>For a named profile called <code>content</code>, the usual Linux, macOS, or WSL path is:</p>
+    <pre><code>~/.hermes/profiles/content/SOUL.md</code></pre>
+    <p>For the default profile, the usual Linux, macOS, or WSL path is:</p>
+    <pre><code>~/.hermes/SOUL.md</code></pre>
+    <p>You can edit the named profile file directly with any text editor. For example, on macOS or Linux:</p>
+    <pre><code>nano ~/.hermes/profiles/content/SOUL.md</code></pre>
+    <p>On native Windows, the named profile file is normally <code>%LOCALAPPDATA%\hermes\profiles\content\SOUL.md</code>. Use Hermes Desktop, PowerShell, or a normal text editor. The <code>~</code> symbol in the other examples means your user home directory.<sup><a href="#sources" aria-label="Source 9">[9]</a></sup></p>
+    <p>If the active Hermes session has file-writing tools, you can approve it to write the file after it states the exact path. Do not let it guess which profile should be changed.</p>
+    <p>Start a new session after saving. Hermes loads <code>SOUL.md</code> at session start, and an active <code>/personality</code> overlay can still change how the current session sounds.<sup><a href="#sources" aria-label="Sources 7 and 8">[7][8]</a></sup></p>
+
+    <h3>Test the behavior, not just the wording</h3>
+    <p>Run three or four small tests:</p>
+    <ol>
+      <li>Ask for a normal answer and check tone and length.</li>
+      <li>Give the agent a weak claim and see whether it flags the lack of evidence.</li>
+      <li>Ask for a simulated external action with no real target and confirm that it requests approval. Verify actual enforcement separately in Safety and tool settings.</li>
+      <li>Give it a project-specific rule and check that it suggests the project context file rather than bloating <code>SOUL.md</code>.</li>
+    </ol>
+    <p>Test one change at a time. A few ordinary chats will expose vague or conflicting instructions.<sup><a href="#sources" aria-label="Source 7">[7]</a></sup></p>
+  </section>
+
+  <!-- ============ 8. Operate ============ -->
+  <section id="operate">
+    <h2>Switch profiles without changing the wrong agent</h2>
+    <p>Hermes gives you three targeting methods.</p>
+
+    <h3>Use the generated command alias</h3>
+    <pre><code>content chat
+content doctor
+content skills list
+content config set terminal.cwd /absolute/path/to/content-workspace</code></pre>
+    <p>On POSIX host installs, the alias is a wrapper for <code>hermes -p content</code> and normally lives at <code>~/.local/bin/content</code>.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+
+    <h3>Use the explicit profile flag</h3>
+    <pre><code>hermes -p content chat
+hermes --profile=content doctor
+hermes chat -p content -q "Draft an outline"</code></pre>
+    <p>Use the explicit <code>-p</code> form in scripts and automation. It does not depend on whichever sticky default a person selected earlier.</p>
+
+    <h3>Change the sticky default</h3>
+    <pre><code>hermes profile use content
+hermes chat
+hermes profile use default</code></pre>
+    <p>After <code>hermes profile use content</code>, plain <code>hermes</code> commands target that profile until you switch again.<sup><a href="#sources" aria-label="Sources 1 and 2">[1][2]</a></sup></p>
+    <p>If <code>content</code> is not found, make sure <code>~/.local/bin</code> is on <code>PATH</code> and open a new shell. <code>hermes profile alias content</code> recreates the wrapper but does not repair <code>PATH</code>; <code>hermes -p content &hellip;</code> works without the alias.</p>
+    <pre><code>hermes profile alias content</code></pre>
+
+    <h3>Run multiple profile gateways</h3>
+    <p>Run one gateway process per profile unless you have many low-traffic profiles.<sup><a href="#sources" aria-label="Source 3">[3]</a></sup> Each process has its own bot token and can be restarted without interrupting the others.</p>
+    <p>Configure a unique bot token for each profile on each messaging platform. If two profiles use the same supported-platform token, Hermes blocks the second gateway and identifies the conflicting profile.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+    <pre><code>content gateway install
+content gateway start
+
+research gateway install
+research gateway start</code></pre>
+    <p>Hermes can also let the default profile&rsquo;s gateway serve every profile. Before enabling <code>gateway.multiplex_profiles</code>, stop any secondary profile gateways. Do not run separate secondary gateways while the multiplexer is serving them.<sup><a href="#sources" aria-label="Source 3">[3]</a></sup></p>
+    <p>Target the default profile explicitly when enabling it:</p>
+    <pre><code>hermes -p default config set gateway.multiplex_profiles true
+hermes -p default gateway restart</code></pre>
+    <p>Multiplexing uses fewer processes, but one restart affects every profile it serves. Separate gateways are simpler for most small installations.<sup><a href="#sources" aria-label="Source 3">[3]</a></sup></p>
+
+    <h3>Back up, move, share, or delete a profile</h3>
+    <p><strong>Export a portable snapshot.</strong></p>
+    <pre><code>hermes profile export content
+hermes profile export content -o ./content-profile.tar.gz</code></pre>
+    <p>Profile export creates a compressed archive. <code>.env</code> and <code>auth.json</code> are excluded, but an export is not privacy-sanitized: it can still contain memories, session transcripts, skills, and other sensitive content. Inspect the archive before sharing it.<sup><a href="#sources" aria-label="Sources 2 and 4">[2][4]</a></sup></p>
+    <p><strong>Import as a new profile.</strong></p>
+    <pre><code>hermes profile import ./content-profile.tar.gz
+hermes profile import ./content-profile.tar.gz --name content-restored</code></pre>
+    <p>Import refuses to overwrite an existing profile and cannot import an archive as the built-in <code>default</code> profile.<sup><a href="#sources" aria-label="Source 2">[2]</a></sup></p>
+    <p>The archive does not contain credentials. Configure them locally after import:</p>
+    <pre><code>hermes -p content-restored setup</code></pre>
+    <p><strong>Use a distribution for a maintained agent package.</strong> A profile distribution is a Git repository containing a shareable agent definition such as <code>SOUL.md</code>, config, skills, cron jobs, and MCP connections. Recipients install and update the package while keeping their own memories, sessions, credentials, and <code>.env</code> values.<sup><a href="#sources" aria-label="Source 4">[4]</a></sup></p>
+    <p>Use export/import for a snapshot or machine move. Use a distribution when a team or community should receive versioned updates.<sup><a href="#sources" aria-label="Source 4">[4]</a></sup></p>
+    <p><strong>Delete only after exporting anything you need.</strong></p>
+    <pre><code>hermes profile delete content</code></pre>
+    <p>Deletion removes the named profile&rsquo;s config, memory, sessions, skills, alias, and related data. It is permanent. The default profile cannot be deleted with this command.<sup><a href="#sources" aria-label="Source 2">[2]</a></sup></p>
+    <p>Avoid <code>--yes</code> unless the script has verified the profile name and confirmed a backup.</p>
+
+    <h3>Common profile mistakes and how to fix them</h3>
+    <p><strong>&ldquo;I edited the wrong agent&rdquo;</strong> &mdash; Run <code>hermes profile list</code> and <code>hermes profile show content</code>, then check the Desktop <strong>Applies to</strong> selector or use an explicit alias or <code>-p</code> flag before changing settings.<sup><a href="#sources" aria-label="Sources 2 and 5">[2][5]</a></sup></p>
+    <p><strong>&ldquo;The profile starts in the wrong folder&rdquo;</strong> &mdash; A profile home and terminal working directory are separate. Set an absolute starting directory:<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+    <pre><code>content config set terminal.cwd /absolute/path/to/project</code></pre>
+    <p><strong>&ldquo;I changed SOUL.md, but the agent sounds the same&rdquo;</strong> &mdash; Confirm that you edited the <code>SOUL.md</code> under the selected profile&rsquo;s <code>HERMES_HOME</code>, that the file is not empty, and that you started a new session. Also check whether <code>/personality</code> is applying a temporary overlay.<sup><a href="#sources" aria-label="Sources 7 and 8">[7][8]</a></sup></p>
+    <p><strong>&ldquo;The cloned profile can access the same keys&rdquo;</strong> &mdash; <code>--clone</code> copies <code>.env</code>. Replace or remove copied credentials before using the new profile.<sup><a href="#sources" aria-label="Sources 1 and 2">[1][2]</a></sup></p>
+    <p><strong>&ldquo;Two agents are changing each other&rsquo;s memory&rdquo;</strong> &mdash; Stop both and confirm that they are not pointed at the same <code>HERMES_HOME</code>. Every running agent should have its own profile.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+    <p><strong>&ldquo;I created a profile for security, but it can still see my files&rdquo;</strong> &mdash; Profiles are state boundaries, not filesystem sandboxes. Configure the terminal backend and access controls that enforce the boundary you need.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+
+    <h3 id="cheatsheet">Hermes profile command cheat sheet</h3>
+    <table>
+      <thead><tr><th>Goal</th><th>Command</th></tr></thead>
+      <tbody>
+        <tr><td>List profiles</td><td><code>hermes profile list</code></td></tr>
+        <tr><td>Create a blank profile</td><td><code>hermes profile create &lt;name&gt;</code></td></tr>
+        <tr><td>Create with a role description</td><td><code>hermes profile create &lt;name&gt; --description "&lt;role&gt;"</code></td></tr>
+        <tr><td>Clone config, <code>.env</code>, <code>SOUL.md</code>, and skills</td><td><code>hermes profile create &lt;name&gt; --clone</code></td></tr>
+        <tr><td>Clone from a named profile</td><td><code>hermes profile create &lt;name&gt; --clone-from &lt;source&gt;</code></td></tr>
+        <tr><td>Show profile details</td><td><code>hermes profile show &lt;name&gt;</code></td></tr>
+        <tr><td>Set or read a description</td><td><code>hermes profile describe &lt;name&gt;</code></td></tr>
+        <tr><td>Set the sticky default</td><td><code>hermes profile use &lt;name&gt;</code></td></tr>
+        <tr><td>Target one command explicitly</td><td><code>hermes -p &lt;name&gt; &lt;command&gt;</code></td></tr>
+        <tr><td>Regenerate an alias</td><td><code>hermes profile alias &lt;name&gt;</code></td></tr>
+        <tr><td>Rename a named profile</td><td><code>hermes profile rename &lt;old&gt; &lt;new&gt;</code></td></tr>
+        <tr><td>Export a snapshot</td><td><code>hermes profile export &lt;name&gt;</code></td></tr>
+        <tr><td>Import a snapshot</td><td><code>hermes profile import &lt;archive&gt;</code></td></tr>
+        <tr><td>Delete a named profile</td><td><code>hermes profile delete &lt;name&gt;</code></td></tr>
+      </tbody>
+    </table>
+    <p>The full command reference also covers distributions, update metadata, alias options, and non-interactive flags.<sup><a href="#sources" aria-label="Source 2">[2]</a></sup></p>
+  </section>
+
+  <!-- ============ 9. FAQ ============ -->
+  <section id="faq">
+    <h2>Frequently asked questions</h2>
+    <h3>Where are Hermes profiles stored?</h3>
+    <p>On Linux, macOS, and WSL, the default profile normally uses <code>~/.hermes</code> and named profiles use <code>~/.hermes/profiles/&lt;name&gt;</code>. Native Windows normally uses <code>%LOCALAPPDATA%\hermes</code>. Hermes sets <code>HERMES_HOME</code> to the selected profile&rsquo;s directory.<sup><a href="#sources" aria-label="Sources 1 and 9">[1][9]</a></sup></p>
+    <h3>Does cloning copy memory and session history?</h3>
+    <p><code>--clone</code> copies config, <code>.env</code>, <code>SOUL.md</code>, and skills while starting with fresh memory and sessions. <code>--clone-all</code> also copies <code>.env</code>, memories, cron jobs, and plugins, but it still excludes per-profile history such as sessions and the state database.<sup><a href="#sources" aria-label="Sources 1 and 2">[1][2]</a></sup></p>
+    <h3>Can profiles use different models and API keys?</h3>
+    <p>Yes. Each profile has its own <code>config.yaml</code> and <code>.env</code>, so models, provider configuration, API keys, and bot tokens can differ.<sup><a href="#sources" aria-label="Source 1">[1]</a></sup></p>
+    <h3>Can several profiles run at the same time?</h3>
+    <p>Yes, as long as each running agent has its own profile. Gateways can run as separate per-profile processes, or an advanced default-profile gateway can multiplex several profiles.<sup><a href="#sources" aria-label="Sources 1 and 3">[1][3]</a></sup></p>
+    <h3>Should each messaging bot have its own profile?</h3>
+    <p>Usually, yes, when the bots should have different tokens, memories, tools, users, or risk. A dedicated profile makes those differences visible and durable.<sup><a href="#sources" aria-label="Sources 1 and 3">[1][3]</a></sup></p>
+    <h3>Is a profile the same as a project workspace?</h3>
+    <p>No. The profile stores Hermes state. <code>terminal.cwd</code> controls where terminal commands start, and project files such as <code>AGENTS.md</code> hold project instructions.<sup><a href="#sources" aria-label="Sources 1 and 6">[1][6]</a></sup></p>
+    <h3>How do I get Hermes to write a specific SOUL.md?</h3>
+    <p>Start a chat inside the intended profile, paste the SOUL Builder prompt from this guide, answer the short interview, review the result, and approve the exact file path before anything is written. Start a new session after saving so Hermes loads the new identity.<sup><a href="#sources" aria-label="Sources 7 and 8">[7][8]</a></sup></p>
+    <h3>What should I do next?</h3>
+    <p>Create one profile for a role that clearly needs different identity, memory, skills, or credentials. Keep the first version small. Verify the profile, draft its <code>SOUL.md</code>, run a few behavior tests, and only then connect external services or move sensitive work into it.</p>
+  </section>
+
+</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <h2 id="sources" style="margin-top:0">Sources</h2>
+    <p class="muted">Every factual claim on this page cites the official Hermes Agent documentation:</p>
+    <div class="sources">
+      <ol>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/profiles">Profiles | Hermes Agent</a></li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/reference/profile-commands">Profile Commands | Hermes Agent</a></li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/multi-profile-gateways">Multi-Profile Gateways | Hermes Agent</a></li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/profile-distributions">Profile Distributions | Hermes Agent</a></li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/desktop">Desktop | Hermes Agent</a></li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/which-file-does-what">Which File Does What | Hermes Agent</a></li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/guides/use-soul-with-hermes">Use SOUL.md with Hermes | Hermes Agent</a></li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/personality">Personality and SOUL.md | Hermes Agent</a></li>
+        <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/windows-native">Native Windows | Hermes Agent</a></li>
+      </ol>
+    </div>
+    <p>Built for Hermes Agent by Nous Research. Verify current commands against the official Hermes Agent documentation.</p>
+  </div>
+</footer>
+</body>
+</html>

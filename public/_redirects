@@ -1,4 +1,6 @@
 # Cloudflare Pages redirects.
 # www redirects to the apex through a Cloudflare zone Page Rule.
-# If blog.agentsasfolders.ai ever gets pointed at this project, send it home.
+
+# Everything is a path on the apex. These 2 subdomains send traffic home.
 https://blog.agentsasfolders.ai/* https://agentsasfolders.ai/blog/:splat 301
+https://profiles.agentsasfolders.ai/* https://agentsasfolders.ai/profiles/:splat 301
