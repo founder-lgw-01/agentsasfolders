@@ -61,6 +61,26 @@ Paused 2026-09-08. The site builds clean and runs locally. Nothing is deployed.
 only and do not ship in `dist/`. Check them before adding anything that runs at
 request time beyond the waitlist function.
 
+## The 2 empty rungs on /hermes
+
+`src/pages/hermes.astro` has a ladder near the top of the file. 2 rungs render
+greyed with a "Being written" tag and link nowhere:
+
+    02  Getting started            installing Hermes and running it once
+    04  Channels and automations   Discord, Telegram, email, scheduled work
+
+When that content exists, add a page, set `href`, and flip `ready: true` in the
+array. No other edits.
+
+The owner is writing 02 later. It is the honest gap: a fresh visitor from the
+video has no on-ramp to actually running Hermes, and rung 05, the profiles
+guide, assumes it is already installed.
+
+⚠️ Anything written for these rungs obeys
+`c:\9-stage-video-pipeline\_reference\disclosure-boundary.md`. Teach the
+architecture, never show the real system. Every screenshot is a purpose built
+demo.
+
 ## The other workspace
 
 The production line that made the video this site supports is at
