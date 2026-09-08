@@ -57,7 +57,9 @@ nav.top{
 nav.top .brand{
   font:700 15px "JetBrains Mono",ui-monospace,monospace;
   letter-spacing:.02em;white-space:nowrap;
+  color:var(--text);text-decoration:none;
 }
+nav.top .brand:hover{color:var(--text);text-decoration:none}
 nav.top .brand .gold{color:var(--gold)}
 nav.top .links{display:flex;flex-wrap:wrap;gap:4px 14px;margin-left:auto}
 nav.top .links a{font-size:13.5px;color:var(--muted);padding:4px 2px}
@@ -205,8 +207,9 @@ footer .sources a{color:var(--gold)}
 </head>
 <body>
 <nav class="top" aria-label="Sections">
-  <div class="brand">~/.hermes<span class="gold">/profiles</span></div>
+  <a class="brand" href="/">~/.hermes<span class="gold">/profiles</span></a>
   <div class="links">
+    <a href="/">&#x2190; Agents As Folders</a>
     <a href="#what-is">What</a>
     <a href="#sandbox">Boundary</a>
     <a href="#when">When</a>
@@ -694,6 +697,7 @@ hermes profile import ./content-profile.tar.gz --name content-restored</code></p
       </ol>
     </div>
     <p>Built for Hermes Agent by Nous Research. Verify current commands against the official Hermes Agent documentation.</p>
+    <p><a href="/">&#x2190; Back to Agents As Folders</a> &middot; <a href="/hermes">Hermes from the start</a> &middot; <a href="/start">Build 3 folders</a></p>
   </div>
 </footer>
 </body>
