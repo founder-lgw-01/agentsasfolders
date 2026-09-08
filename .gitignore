@@ -4,5 +4,7 @@ dist/
 .wrangler/
 .env
 .env.production
+.claude/
+CLAUDE.local.md
 .DS_Store
 *.log
