@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-labelledby="t5 d5" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, monospace">
+  <title id="t5">Loop showing how to prompt, interview, review, save, test, and refine a SOUL.md</title>
+  <desc id="d5">Six stages in a cycle: paste the builder prompt, answer the short interview, review the draft, approve the exact path and save, start a new session and test behaviour, then refine one change at a time and go round again. Two approval gates sit between review and save.</desc>
+
+  <style>
+    .bg    { fill: #0f0f18; }
+    .card  { fill: #16161f; stroke: rgba(255,215,0,.22); }
+    .warn  { fill: #262615; stroke: rgba(255,215,0,.22); }
+    .gold  { fill: #ffd700; }
+    .goldd { fill: #e6c200; }
+    .text  { fill: #f1efe8; }
+    .muted { fill: #b8b8c2; }
+    .rule  { stroke: rgba(255,215,0,.30); fill: none; }
+    .h     { font-size: 21px; font-weight: 700; }
+    .lbl   { font-size: 15.5px; font-weight: 700; }
+    .sm    { font-size: 13px; }
+    .xs    { font-size: 11.5px; }
+    .kick  { font-size: 12.5px; font-weight: 700; letter-spacing: .14em; }
+    .num   { font-size: 13px; font-weight: 700; }
+  </style>
+
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#ffd700"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1200" height="760"/>
+
+  <text class="gold kick" x="60" y="58">SOUL BUILDER LOOP</text>
+  <text class="text h" x="60" y="94">Prompt, interview, review, save, test, refine</text>
+  <text class="muted sm" x="60" y="120">Two approval gates. Nothing is written until you name the exact path.</text>
+
+  <!-- ring arrows -->
+  <path class="rule" stroke-width="1.6" marker-end="url(#arw)" d="M420 232 h150"/>
+  <path class="rule" stroke-width="1.6" marker-end="url(#arw)" d="M790 232 h150"/>
+  <path class="rule" stroke-width="1.6" marker-end="url(#arw)" d="M1050 300 v104"/>
+  <path class="rule" stroke-width="1.6" marker-end="url(#arw)" d="M940 472 h-150"/>
+  <path class="rule" stroke-width="1.6" marker-end="url(#arw)" d="M570 472 h-150"/>
+  <path class="rule" stroke-width="1.6" marker-end="url(#arw)" d="M210 404 v-104"/>
+
+  <!-- 1 prompt -->
+  <rect class="card" x="70" y="176" width="350" height="124" rx="14"/>
+  <circle class="gold" cx="102" cy="208" r="13"/>
+  <text class="num" x="98" y="213" fill="#0f0f18">1</text>
+  <text class="text lbl" x="126" y="213">Paste the prompt</text>
+  <text class="muted xs" x="96" y="244">Start a chat inside the target profile first,</text>
+  <text class="muted xs" x="96" y="264">so the draft belongs to the right agent.</text>
+  <text class="goldd xs" x="96" y="288">content chat</text>
+
+  <!-- 2 interview -->
+  <rect class="card" x="440" y="176" width="350" height="124" rx="14"/>
+  <circle class="gold" cx="472" cy="208" r="13"/>
+  <text class="num" x="468" y="213" fill="#0f0f18">2</text>
+  <text class="text lbl" x="496" y="213">Answer the interview</text>
+  <text class="muted xs" x="466" y="244">Four questions at a time: mission, voice,</text>
+  <text class="muted xs" x="466" y="264">uncertainty, tool limits, habits to avoid.</text>
+  <text class="goldd xs" x="466" y="288">No file is written yet</text>
+
+  <!-- 3 review -->
+  <rect class="card" x="810" y="176" width="330" height="124" rx="14"/>
+  <circle class="gold" cx="842" cy="208" r="13"/>
+  <text class="num" x="838" y="213" fill="#0f0f18">3</text>
+  <text class="text lbl" x="866" y="213">Review the draft</text>
+  <text class="muted xs" x="836" y="244">Durable rules only. Send tasks, paths and</text>
+  <text class="muted xs" x="836" y="264">secrets somewhere else.</text>
+  <text class="goldd xs" x="836" y="288">Gate 1: approve the draft</text>
+
+  <!-- 4 save -->
+  <rect class="card" x="810" y="404" width="330" height="124" rx="14"/>
+  <circle class="gold" cx="842" cy="436" r="13"/>
+  <text class="num" x="838" y="441" fill="#0f0f18">4</text>
+  <text class="text lbl" x="866" y="441">Save to the right home</text>
+  <text class="muted xs" x="836" y="472">Never let it guess which profile changes.</text>
+  <text class="goldd xs" x="836" y="496">~/.hermes/profiles/content/SOUL.md</text>
+  <text class="goldd xs" x="836" y="516">Gate 2: approve the exact path</text>
+
+  <!-- 5 test -->
+  <rect class="card" x="440" y="404" width="350" height="124" rx="14"/>
+  <circle class="gold" cx="472" cy="436" r="13"/>
+  <text class="num" x="468" y="441" fill="#0f0f18">5</text>
+  <text class="text lbl" x="496" y="441">Test the behaviour</text>
+  <text class="muted xs" x="466" y="472">Start a new session: SOUL.md loads then.</text>
+  <text class="muted xs" x="466" y="492">Check tone, weak claims, approval asks.</text>
+  <text class="goldd xs" x="466" y="516">Wording is not behaviour</text>
+
+  <!-- 6 refine -->
+  <rect class="card" x="70" y="404" width="350" height="124" rx="14"/>
+  <circle class="gold" cx="102" cy="436" r="13"/>
+  <text class="num" x="98" y="441" fill="#0f0f18">6</text>
+  <text class="text lbl" x="126" y="441">Refine, one change</text>
+  <text class="muted xs" x="96" y="472">One edit at a time, or you cannot tell which</text>
+  <text class="muted xs" x="96" y="492">edit did the thing. Then go round again.</text>
+  <text class="goldd xs" x="96" y="516">Ordinary chats expose conflicts</text>
+
+  <!-- safety -->
+  <rect class="warn" x="70" y="588" width="1070" height="96" rx="14"/>
+  <rect class="gold" x="70" y="588" width="4" height="96" rx="2"/>
+  <text class="gold lbl" x="100" y="622">SOUL.md is not access control</text>
+  <text class="muted sm" x="100" y="648">Approval rules in the file guide the agent. They do not enforce permissions.</text>
+  <text class="muted sm" x="100" y="670">Use Safety settings, restricted toolsets and OS permissions. Test with dry runs, never a real send.</text>
+</svg>

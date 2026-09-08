@@ -36,7 +36,45 @@ const ld = {
   mainEntityOfPage: new URL(`/blog/${post.slug}/`, SITE.domain).href,
 }
 
-const ytId = d.video?.match(/(?:v=|youtu\.be\/)([\w-]{11})/)?.[1]
+// Only a real YouTube host yields an ID. An unanchored match on any URL would
+// happily embed the wrong video from evil.example.com/?v=... and miss the
+// /shorts/ and /embed/ forms entirely.
+const YT_HOSTS = new Set([
+  'youtube.com',
+  'www.youtube.com',
+  'm.youtube.com',
+  'music.youtube.com',
+  'youtube-nocookie.com',
+  'www.youtube-nocookie.com',
+  'youtu.be',
+  'www.youtu.be',
+])
+
+function youtubeId(raw) {
+  if (!raw) return undefined
+  let u
+  try {
+    u = new URL(raw)
+  } catch {
+    return undefined
+  }
+  if (u.protocol !== 'https:' && u.protocol !== 'http:') return undefined
+  if (!YT_HOSTS.has(u.hostname.toLowerCase())) return undefined
+
+  const id =
+    u.hostname.toLowerCase().endsWith('youtu.be')
+      ? u.pathname.slice(1)
+      : u.searchParams.get('v') ||
+        u.pathname.match(/^\/(?:embed|shorts|v|live)\/([^/?#]+)/)?.[1]
+
+  return id && /^[\w-]{11}$/.test(id) ? id : undefined
+}
+
+const ytId = youtubeId(d.video)
+
+// JSON.stringify does not escape "/", so a title containing </script> would
+// close this block early and run as HTML. Escape the bracket, not the slash.
+const ldJson = JSON.stringify(ld).replace(/</g, '\\u003c')
 ---
 
 <Base
@@ -48,7 +86,7 @@ const ytId = d.video?.match(/(?:v=|youtu\.be\/)([\w-]{11})/)?.[1]
   <script
     slot="head"
     type="application/ld+json"
-    set:html={JSON.stringify(ld)}
+    set:html={ldJson}
   />
 
   <section>

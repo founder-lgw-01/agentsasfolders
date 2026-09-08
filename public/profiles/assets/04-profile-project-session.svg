@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-labelledby="t4 d4" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, monospace">
+  <title id="t4">Comparison of a profile, project context, and session</title>
+  <desc id="d4">Three layers stacked by lifetime. The profile says who the agent is and persists until deleted. The project context says how to work in this folder and persists with the repository. The session is what you are discussing now and ends when the chat ends.</desc>
+
+  <style>
+    .bg    { fill: #0f0f18; }
+    .card  { fill: #16161f; stroke: rgba(255,215,0,.22); }
+    .inner { fill: #0a0a12; stroke: rgba(255,215,0,.10); }
+    .gold  { fill: #ffd700; }
+    .goldd { fill: #e6c200; }
+    .text  { fill: #f1efe8; }
+    .muted { fill: #b8b8c2; }
+    .rule  { stroke: rgba(255,215,0,.22); fill: none; }
+    .h     { font-size: 21px; font-weight: 700; }
+    .lbl   { font-size: 17px; font-weight: 700; }
+    .sm    { font-size: 13.5px; }
+    .xs    { font-size: 12px; }
+    .kick  { font-size: 12.5px; font-weight: 700; letter-spacing: .14em; }
+  </style>
+
+  <rect class="bg" width="1200" height="760"/>
+
+  <text class="gold kick" x="60" y="58">THREE LAYERS</text>
+  <text class="text h" x="60" y="94">Different questions, different lifetimes</text>
+  <text class="muted sm" x="60" y="120">Put a rule in the layer that matches how long it should live.</text>
+
+  <!-- lifetime axis -->
+  <text class="muted xs" x="60" y="168">LIVES LONGEST</text>
+  <path class="rule" stroke-width="1.5" d="M120 180 v420" stroke-dasharray="4 6"/>
+  <text class="muted xs" x="60" y="622">ENDS SOONEST</text>
+
+  <!-- profile -->
+  <rect class="card" x="180" y="176" width="960" height="140" rx="14"/>
+  <rect class="gold" x="180" y="176" width="6" height="140" rx="3"/>
+  <text class="gold lbl" x="214" y="212">The profile</text>
+  <text class="text sm" x="214" y="238">Who the agent is</text>
+  <text class="muted xs" x="214" y="262">Identity, voice, memory, skills, credentials, model. Persists until you delete it.</text>
+  <rect class="inner" x="214" y="274" width="200" height="30" rx="8"/>
+  <text class="goldd xs" x="230" y="294">SOUL.md</text>
+  <rect class="inner" x="426" y="274" width="200" height="30" rx="8"/>
+  <text class="goldd xs" x="442" y="294">USER.md</text>
+  <rect class="inner" x="638" y="274" width="200" height="30" rx="8"/>
+  <text class="goldd xs" x="654" y="294">MEMORY.md</text>
+  <rect class="inner" x="850" y="274" width="200" height="30" rx="8"/>
+  <text class="goldd xs" x="866" y="294">config.yaml, .env</text>
+
+  <!-- project -->
+  <rect class="card" x="180" y="340" width="960" height="140" rx="14"/>
+  <rect class="goldd" x="180" y="340" width="6" height="140" rx="3"/>
+  <text class="goldd lbl" x="214" y="376">The project context</text>
+  <text class="text sm" x="214" y="402">How to work in this folder</text>
+  <text class="muted xs" x="214" y="426">Paths, commands, ports, conventions. Travels with the repository, not the agent.</text>
+  <rect class="inner" x="214" y="438" width="200" height="30" rx="8"/>
+  <text class="goldd xs" x="230" y="458">AGENTS.md</text>
+  <rect class="inner" x="426" y="438" width="200" height="30" rx="8"/>
+  <text class="goldd xs" x="442" y="458">.hermes.md</text>
+  <text class="muted xs" x="650" y="458">Any agent that opens this folder reads these.</text>
+
+  <!-- session -->
+  <rect class="card" x="180" y="504" width="960" height="140" rx="14"/>
+  <rect class="muted" x="180" y="504" width="6" height="140" rx="3"/>
+  <text class="text lbl" x="214" y="540">The session</text>
+  <text class="text sm" x="214" y="566">What you are discussing now</text>
+  <text class="muted xs" x="214" y="590">One conversation. Ends when the chat ends. A /personality overlay lives here too.</text>
+  <rect class="inner" x="214" y="602" width="200" height="30" rx="8"/>
+  <text class="muted xs" x="230" y="622">/personality</text>
+  <text class="muted xs" x="426" y="622">Memory loads at session start; edits land in the next one.</text>
+
+  <text class="muted xs" x="180" y="694">A task that ends this week does not belong in SOUL.md. That is the whole test.</text>
+</svg>

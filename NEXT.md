@@ -31,9 +31,12 @@ Paused 2026-09-08. The site builds clean and runs locally. Nothing is deployed.
      signups still store in KV.
 6. **Verify the waitlist end to end.** Submit a real address, then pull it back:
    ```
-   curl "https://agentsasfolders.ai/api/waitlist?key=YOUR_EXPORT_KEY"
+   curl -H "Authorization: Bearer YOUR_EXPORT_KEY" \
+     https://agentsasfolders.ai/api/waitlist
    ```
    A form that looks fine and stores nothing is the failure worth catching.
+   Also submit once with JavaScript disabled: that path 303s to `/thanks/`
+   rather than dumping raw JSON at the visitor.
 7. **Nothing to do for the blog.** It is `agentsasfolders.ai/blog`, a route in
    this same build, not a subdomain and not a 2nd project. If
    `blog.agentsasfolders.ai` was ever pointed anywhere, send it to

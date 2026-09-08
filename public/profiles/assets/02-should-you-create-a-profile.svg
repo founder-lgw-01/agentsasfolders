@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-labelledby="t2 d2" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, monospace">
+  <title id="t2">Decision tree for choosing a profile, project context file, sandbox, or new chat</title>
+  <desc id="d2">Four questions asked in order. If you need enforced filesystem limits, use a sandbox. If identity, memory, keys or tools must stay separate, create a profile. If only one project's conventions changed, use a project context file. Otherwise start a new session.</desc>
+
+  <style>
+    .bg    { fill: #0f0f18; }
+    .q     { fill: #16161f; stroke: rgba(255,215,0,.22); }
+    .ans   { fill: #0a0a12; stroke: rgba(255,215,0,.10); }
+    .gold  { fill: #ffd700; }
+    .goldd { fill: #e6c200; }
+    .text  { fill: #f1efe8; }
+    .muted { fill: #b8b8c2; }
+    .rule  { stroke: rgba(255,215,0,.22); fill: none; }
+    .h     { font-size: 21px; font-weight: 700; }
+    .lbl   { font-size: 15.5px; font-weight: 700; }
+    .sm    { font-size: 13px; }
+    .xs    { font-size: 12px; }
+    .kick  { font-size: 12.5px; font-weight: 700; letter-spacing: .14em; }
+  </style>
+
+  <rect class="bg" width="1200" height="760"/>
+
+  <text class="gold kick" x="60" y="58">ASK IN THIS ORDER</text>
+  <text class="text h" x="60" y="94">Do you actually need a profile?</text>
+  <text class="muted sm" x="60" y="120">Stop at the first yes. A profile adds durable state, so it earns its place or it does not.</text>
+
+  <!-- Q1 -->
+  <rect class="q" x="60" y="152" width="640" height="96" rx="14"/>
+  <text class="goldd xs" x="86" y="182">QUESTION 1</text>
+  <text class="text lbl" x="86" y="208">Do you need enforced filesystem or process limits?</text>
+  <text class="muted xs" x="86" y="230">Not "kept tidy". Enforced.</text>
+  <path class="rule" stroke-width="1.5" d="M700 200 h60"/>
+  <rect class="ans" x="760" y="164" width="380" height="72" rx="12"/>
+  <rect class="gold" x="760" y="164" width="4" height="72" rx="2"/>
+  <text class="gold lbl" x="786" y="194">Use a sandbox</text>
+  <text class="muted xs" x="786" y="216">A profile does not enforce that boundary</text>
+
+  <!-- Q2 -->
+  <path class="rule" stroke-width="1.5" d="M120 248 v40"/>
+  <rect class="q" x="60" y="288" width="640" height="96" rx="14"/>
+  <text class="goldd xs" x="86" y="318">QUESTION 2</text>
+  <text class="text lbl" x="86" y="344">Must identity, memory, keys or tools stay separate?</text>
+  <text class="muted xs" x="86" y="366">After the chat ends and after a restart.</text>
+  <path class="rule" stroke-width="1.5" d="M700 336 h60"/>
+  <rect class="ans" x="760" y="300" width="380" height="72" rx="12"/>
+  <rect class="gold" x="760" y="300" width="4" height="72" rx="2"/>
+  <text class="gold lbl" x="786" y="330">Create a profile</text>
+  <text class="muted xs" x="786" y="352">Durable agent-level differences</text>
+
+  <!-- Q3 -->
+  <path class="rule" stroke-width="1.5" d="M120 384 v40"/>
+  <rect class="q" x="60" y="424" width="640" height="96" rx="14"/>
+  <text class="goldd xs" x="86" y="454">QUESTION 3</text>
+  <text class="text lbl" x="86" y="480">Did only one project's commands or conventions change?</text>
+  <text class="muted xs" x="86" y="502">Paths, ports, build steps.</text>
+  <path class="rule" stroke-width="1.5" d="M700 472 h60"/>
+  <rect class="ans" x="760" y="436" width="380" height="72" rx="12"/>
+  <rect class="goldd" x="760" y="436" width="4" height="72" rx="2"/>
+  <text class="goldd lbl" x="786" y="466">AGENTS.md or .hermes.md</text>
+  <text class="muted xs" x="786" y="488">Project instructions live with the project</text>
+
+  <!-- Q4 -->
+  <path class="rule" stroke-width="1.5" d="M120 520 v40"/>
+  <rect class="q" x="60" y="560" width="640" height="96" rx="14"/>
+  <text class="goldd xs" x="86" y="590">QUESTION 4</text>
+  <text class="text lbl" x="86" y="616">Did only the speaking style change, just for now?</text>
+  <text class="muted xs" x="86" y="638">A temporary overlay, not a baseline.</text>
+  <path class="rule" stroke-width="1.5" d="M700 608 h60"/>
+  <rect class="ans" x="760" y="572" width="380" height="72" rx="12"/>
+  <rect class="goldd" x="760" y="572" width="4" height="72" rx="2"/>
+  <text class="goldd lbl" x="786" y="602">/personality</text>
+  <text class="muted xs" x="786" y="624">Session overlay; SOUL.md stays the baseline</text>
+
+  <!-- fallthrough -->
+  <path class="rule" stroke-width="1.5" d="M120 656 v34 h640" stroke-dasharray="4 5"/>
+  <text class="muted sm" x="776" y="695">All four no? Start a new session. Nothing durable changed.</text>
+</svg>

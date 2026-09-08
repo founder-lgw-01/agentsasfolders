@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-labelledby="t3 d3" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, monospace">
+  <title id="t3">Flowchart for defining, creating, configuring, and verifying a profile</title>
+  <desc id="d3">Five steps in order: name the role, create the profile choosing blank or clone, run setup, configure model and working directory and SOUL.md, then verify with profile show and doctor before connecting external services or moving sensitive work in.</desc>
+
+  <style>
+    .bg    { fill: #0f0f18; }
+    .card  { fill: #16161f; stroke: rgba(255,215,0,.22); }
+    .code  { fill: #0a0a12; stroke: rgba(255,215,0,.10); }
+    .gold  { fill: #ffd700; }
+    .goldd { fill: #e6c200; }
+    .text  { fill: #f1efe8; }
+    .muted { fill: #b8b8c2; }
+    .cyan  { fill: #bff4f0; }
+    .rule  { stroke: rgba(255,215,0,.22); fill: none; }
+    .h     { font-size: 21px; font-weight: 700; }
+    .lbl   { font-size: 16px; font-weight: 700; }
+    .sm    { font-size: 13px; }
+    .xs    { font-size: 12px; }
+    .mono  { font-size: 12.5px; }
+    .kick  { font-size: 12.5px; font-weight: 700; letter-spacing: .14em; }
+    .num   { font-size: 15px; font-weight: 700; }
+  </style>
+
+  <rect class="bg" width="1200" height="760"/>
+
+  <text class="gold kick" x="60" y="58">SETUP FLOW</text>
+  <text class="text h" x="60" y="94">Name it, create it, configure it, verify it</text>
+  <text class="muted sm" x="60" y="120">Only then connect services or move sensitive work in.</text>
+
+  <!-- rail -->
+  <path class="rule" stroke-width="1.5" d="M96 176 v470"/>
+
+  <!-- step 1 -->
+  <circle class="gold" cx="96" cy="200" r="15"/>
+  <text class="bg num" x="91" y="205" fill="#0f0f18">1</text>
+  <rect class="card" x="140" y="164" width="1000" height="88" rx="14"/>
+  <text class="text lbl" x="168" y="196">Decide the role, not the label</text>
+  <text class="muted xs" x="168" y="218">A short name in letters, numbers, hyphens or underscores. Describe the work it does.</text>
+  <rect class="code" x="700" y="180" width="420" height="56" rx="10"/>
+  <text class="cyan mono" x="720" y="204">hermes profile create content \</text>
+  <text class="cyan mono" x="720" y="224">  --description "Drafts and edits."</text>
+
+  <!-- step 2 -->
+  <circle class="gold" cx="96" cy="316" r="15"/>
+  <text class="num" x="91" y="321" fill="#0f0f18">2</text>
+  <rect class="card" x="140" y="280" width="1000" height="88" rx="14"/>
+  <text class="text lbl" x="168" y="312">Choose blank or clone, before you run it</text>
+  <text class="muted xs" x="168" y="334">--clone and --clone-all both copy .env, so either can duplicate API keys and bot tokens.</text>
+  <rect class="code" x="700" y="296" width="420" height="56" rx="10"/>
+  <text class="cyan mono" x="720" y="320">hermes profile create content</text>
+  <text class="cyan mono" x="720" y="340">hermes profile create content --clone</text>
+
+  <!-- step 3 -->
+  <circle class="gold" cx="96" cy="432" r="15"/>
+  <text class="num" x="91" y="437" fill="#0f0f18">3</text>
+  <rect class="card" x="140" y="396" width="1000" height="88" rx="14"/>
+  <text class="text lbl" x="168" y="428">Run setup through the alias</text>
+  <text class="muted xs" x="168" y="450">The alias sets the correct HERMES_HOME, so you can see which profile receives the change.</text>
+  <rect class="code" x="700" y="412" width="420" height="56" rx="10"/>
+  <text class="cyan mono" x="720" y="436">content setup --portal</text>
+  <text class="cyan mono" x="720" y="456">content setup</text>
+
+  <!-- step 4 -->
+  <circle class="gold" cx="96" cy="548" r="15"/>
+  <text class="num" x="91" y="553" fill="#0f0f18">4</text>
+  <rect class="card" x="140" y="512" width="1000" height="88" rx="14"/>
+  <text class="text lbl" x="168" y="544">Set the model, the working directory, the SOUL.md</text>
+  <text class="muted xs" x="168" y="566">Creating a profile does not set the terminal's working directory. Set terminal.cwd yourself.</text>
+  <rect class="code" x="700" y="528" width="420" height="56" rx="10"/>
+  <text class="cyan mono" x="720" y="552">content config set model.default ...</text>
+  <text class="cyan mono" x="720" y="572">content config set terminal.cwd /abs/path</text>
+
+  <!-- step 5 -->
+  <circle class="gold" cx="96" cy="664" r="15"/>
+  <text class="num" x="91" y="669" fill="#0f0f18">5</text>
+  <rect class="card" x="140" y="628" width="1000" height="88" rx="14"/>
+  <text class="text lbl" x="168" y="660">Verify before adding sensitive work</text>
+  <text class="muted xs" x="168" y="682">The agent's own answer is not proof. Confirm with profile show and inspect the config.</text>
+  <rect class="code" x="700" y="644" width="420" height="56" rx="10"/>
+  <text class="cyan mono" x="720" y="668">hermes profile show content</text>
+  <text class="cyan mono" x="720" y="688">content doctor</text>
+</svg>
