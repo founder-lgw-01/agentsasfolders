@@ -2,9 +2,12 @@
 import Base from '../../layouts/Base.astro'
 import { getCollection } from 'astro:content'
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-)
+// Drafts list in dev so you can click through to them, never in production.
+const posts = (
+  await getCollection('blog', ({ data }) =>
+    import.meta.env.PROD ? !data.draft : true
+  )
+).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 
 const fmt = (d) =>
   d.toLocaleDateString('en-US', {

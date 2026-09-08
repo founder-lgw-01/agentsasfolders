@@ -79,8 +79,12 @@ Vars: `NOTIFY_TO` and `NOTIFY_FROM`, both default to waitlist@agentsasfolders.ai
 
 ### Getting the list out
 
+The key goes in a header, not the query string, so it stays out of access logs,
+proxies and browser history:
+
 ```
-curl "https://agentsasfolders.ai/api/waitlist?key=YOUR_EXPORT_KEY"
+curl -H "Authorization: Bearer YOUR_EXPORT_KEY" \
+  https://agentsasfolders.ai/api/waitlist
 ```
 
 Or straight from KV:

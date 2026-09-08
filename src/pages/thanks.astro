@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro'
+
+// Where the waitlist form lands when the browser has no JavaScript. The
+// function 303s here with ?s=<outcome> instead of returning a bare JSON
+// document. Every outcome gets a real page with a way back.
+const outcomes = {
+  ok: {
+    heading: "You're on the list",
+    body: "I'll email you when the VIP classroom opens. Nothing else, and no list swapping.",
+  },
+  already: {
+    heading: 'You were already on it',
+    body: 'That address is on the list from an earlier signup. Nothing more to do.',
+  },
+  invalid: {
+    heading: 'That address did not look right',
+    body: 'Check it over and try again. Nothing was saved.',
+  },
+  slow: {
+    heading: 'Too many tries',
+    body: 'Give it a few minutes and try once more.',
+  },
+  error: {
+    heading: 'That did not go through',
+    body: 'Something broke on my end, not yours. Try again in a minute.',
+  },
+}
+
+const s = Astro.url.searchParams.get('s') ?? 'ok'
+const { heading, body } = outcomes[s] ?? outcomes.ok
+---
+
+<Base title={heading} description={body} path="/thanks/" noindex>
+  <section>
+    <div class="wrap prose">
+      <span class="badge">VIP waitlist</span>
+      <h1>{heading}</h1>
+      <p class="lede">{body}</p>
+      <div class="btn-row">
+        <a class="btn" href="/start">Build 3 folders</a>
+        <a class="btn btn--ghost" href="/">Back to the front</a>
+      </div>
+    </div>
+  </section>
+</Base>

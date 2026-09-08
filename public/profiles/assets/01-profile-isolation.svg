@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" aria-labelledby="t1 d1" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, monospace">
+  <title id="t1">One Hermes installation with isolated default, coding, and content profiles</title>
+  <desc id="d1">A single Hermes install sits above three separate profile homes. Each profile holds its own config, SOUL.md, env file, memories and sessions, and none of them share state with the others.</desc>
+
+  <style>
+    .bg    { fill: #0f0f18; }
+    .card  { fill: #16161f; stroke: rgba(255,215,0,.22); }
+    .inner { fill: #0a0a12; stroke: rgba(255,215,0,.10); }
+    .gold  { fill: #ffd700; }
+    .goldd { fill: #e6c200; }
+    .text  { fill: #f1efe8; }
+    .muted { fill: #b8b8c2; }
+    .rule  { stroke: rgba(255,215,0,.22); }
+    .h     { font-size: 21px; font-weight: 700; }
+    .lbl   { font-size: 16px; font-weight: 700; }
+    .sm    { font-size: 13px; }
+    .xs    { font-size: 12px; }
+    .kick  { font-size: 12.5px; font-weight: 700; letter-spacing: .14em; }
+  </style>
+
+  <rect class="bg" width="1200" height="760"/>
+
+  <text class="gold kick" x="60" y="62">ONE INSTALL, THREE HOMES</text>
+  <text class="text h" x="60" y="98">A profile is a folder of state</text>
+  <text class="muted sm" x="60" y="126">Hermes resolves everything it loads from the selected HERMES_HOME.</text>
+
+  <!-- install bar -->
+  <rect class="card" x="60" y="158" width="1080" height="70" rx="14"/>
+  <circle class="gold" cx="98" cy="193" r="7"/>
+  <text class="text lbl" x="120" y="199">hermes</text>
+  <text class="muted sm" x="205" y="199">one binary, one version, on this machine</text>
+  <text class="goldd xs" x="1010" y="199">HERMES_HOME selects</text>
+
+  <!-- connectors -->
+  <path class="rule" fill="none" stroke-width="1.5" d="M600 228 v34"/>
+  <path class="rule" fill="none" stroke-width="1.5" d="M230 262 h740"/>
+  <path class="rule" fill="none" stroke-width="1.5" d="M230 262 v30 M600 262 v30 M970 262 v30"/>
+
+  <!-- profile column: default -->
+  <g>
+    <rect class="card" x="70" y="292" width="320" height="392" rx="14"/>
+    <rect class="gold" x="70" y="292" width="320" height="4" rx="2"/>
+    <text class="gold lbl" x="96" y="334">~/.hermes/</text>
+    <text class="muted xs" x="96" y="356">default profile</text>
+    <line class="rule" x1="96" y1="374" x2="364" y2="374" stroke-width="1"/>
+    <rect class="inner" x="96" y="392" width="268" height="268" rx="10"/>
+    <text class="text sm" x="118" y="422">config.yaml</text>
+    <text class="text sm" x="118" y="452">SOUL.md</text>
+    <text class="text sm" x="118" y="482">.env</text>
+    <text class="text sm" x="118" y="512">memories/</text>
+    <text class="text sm" x="118" y="542">sessions/</text>
+    <text class="text sm" x="118" y="572">skills/</text>
+    <text class="text sm" x="118" y="602">cron/</text>
+    <text class="muted xs" x="118" y="636">gateway state</text>
+  </g>
+
+  <!-- profile column: coding -->
+  <g>
+    <rect class="card" x="440" y="292" width="320" height="392" rx="14"/>
+    <rect class="goldd" x="440" y="292" width="320" height="4" rx="2"/>
+    <text class="goldd lbl" x="466" y="334">profiles/coding/</text>
+    <text class="muted xs" x="466" y="356">its own agent, its own keys</text>
+    <line class="rule" x1="466" y1="374" x2="734" y2="374" stroke-width="1"/>
+    <rect class="inner" x="466" y="392" width="268" height="268" rx="10"/>
+    <text class="text sm" x="488" y="422">config.yaml</text>
+    <text class="text sm" x="488" y="452">SOUL.md</text>
+    <text class="text sm" x="488" y="482">.env</text>
+    <text class="text sm" x="488" y="512">memories/</text>
+    <text class="text sm" x="488" y="542">sessions/</text>
+    <text class="muted xs" x="488" y="576">separate model</text>
+    <text class="muted xs" x="488" y="600">separate budget</text>
+  </g>
+
+  <!-- profile column: content -->
+  <g>
+    <rect class="card" x="810" y="292" width="320" height="392" rx="14"/>
+    <rect class="goldd" x="810" y="292" width="320" height="4" rx="2"/>
+    <text class="goldd lbl" x="836" y="334">profiles/content/</text>
+    <text class="muted xs" x="836" y="356">its own agent, its own keys</text>
+    <line class="rule" x1="836" y1="374" x2="1104" y2="374" stroke-width="1"/>
+    <rect class="inner" x="836" y="392" width="268" height="268" rx="10"/>
+    <text class="text sm" x="858" y="422">config.yaml</text>
+    <text class="text sm" x="858" y="452">SOUL.md</text>
+    <text class="text sm" x="858" y="482">.env</text>
+    <text class="text sm" x="858" y="512">memories/</text>
+    <text class="text sm" x="858" y="542">sessions/</text>
+    <text class="muted xs" x="858" y="576">separate bot token</text>
+    <text class="muted xs" x="858" y="600">separate gateway</text>
+  </g>
+
+  <text class="muted xs" x="60" y="722">No arrows between the three columns. That absence is the point: nothing crosses.</text>
+</svg>

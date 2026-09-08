@@ -36,30 +36,49 @@ const { id = 'waitlist' } = Astro.props
   const form = document.getElementById(id)
   const msg = document.getElementById(`${id}-msg`)
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault()
+  if (form) {
     const btn = form.querySelector('button')
-    btn.disabled = true
-    msg.textContent = 'Adding you...'
-
-    try {
-      const res = await fetch(form.action, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(Object.fromEntries(new FormData(form))),
-      })
-      const data = await res.json().catch(() => ({}))
-
-      if (res.ok) {
-        msg.textContent = data.message || "You're on the list."
-        form.reset()
-      } else {
-        msg.textContent = data.message || 'That did not work. Try again.'
-      }
-    } catch {
-      msg.textContent = 'Network trouble. Try again in a minute.'
-    } finally {
-      btn.disabled = false
+    // Never write through a null node: if the message element is missing the
+    // button must still come back, or the form is dead until a reload.
+    const say = (text) => {
+      if (msg) msg.textContent = text
     }
-  })
+    let busy = false
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      // Guards the double submit that a disabled button alone does not catch:
+      // Enter pressed twice, or any programmatic submit.
+      if (busy) return
+      busy = true
+
+      try {
+        if (btn) btn.disabled = true
+        say('Adding you...')
+
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify(Object.fromEntries(new FormData(form))),
+        })
+        const data = await res.json().catch(() => ({}))
+
+        if (res.ok) {
+          say(data.message || "You're on the list.")
+          form.reset()
+        } else {
+          say(data.message || 'That did not work. Try again.')
+        }
+      } catch {
+        say('Network trouble. Try again in a minute.')
+      } finally {
+        // Runs even if something above threw, so the button always returns.
+        busy = false
+        if (btn) btn.disabled = false
+      }
+    })
+  }
 </script>

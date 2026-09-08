@@ -1,0 +1,243 @@
+---
+import Base from '../layouts/Base.astro'
+import Waitlist from '../components/Waitlist.astro'
+import { LINKS } from '../config'
+
+// The honest door. What Agents As Folders actually means, said plainly,
+// before anybody is asked to build or buy anything.
+//
+// This page teaches the architecture and never shows the instance. That is
+// the standing rule and it is not a style choice: the patterns are the
+// lesson, the running system is only the evidence they work. No screenshots,
+// no names, no identifiers, nothing that maps to a real host.
+
+const jobs = [
+  {
+    job: 'Configuration',
+    plain: 'Every agent has 1 role and the approved tools for that role. Nothing else.',
+  },
+  {
+    job: 'Access',
+    plain: 'Getting in is checked against who you are, not a password everybody shares.',
+  },
+  {
+    job: 'Change control',
+    plain: 'Changes get planned and checked before they apply, and they can be undone.',
+  },
+  {
+    job: 'Monitoring',
+    plain: 'Somebody watches whether the thing is alive and doing its job.',
+  },
+  {
+    job: 'Recovery',
+    plain: 'The state is backed up, so a bad day is a bad hour instead.',
+  },
+  {
+    job: 'Drift',
+    plain: 'What you believe is running gets compared to what is actually running.',
+  },
+]
+
+const given = [
+  'its own place to run',
+  'its own workspace',
+  'its own stored state',
+  'its own identity on the network',
+  'its own limits',
+  'its own access policy',
+]
+---
+
+<Base
+  title="What this actually is"
+  description="Agents As Folders is not a slogan about folders. It is Hermes agents running on ICM brains, doing real work in a business, inside a layer that decides what they are allowed to touch."
+  path="/what-this-is/"
+>
+  <section style="padding-bottom:1rem">
+    <div class="wrap prose">
+      <span class="badge badge--accent">The whole idea, said once</span>
+      <h1>What this actually is</h1>
+      <p class="lede">
+        The name is not a slogan about folders. It is the literal shape of the
+        thing: agents, built as folders.
+      </p>
+      <p style="color:var(--text)">
+        Most pages like this one open by selling you something. This one just
+        says what the thing is, because if it is not for you, you should be
+        able to work that out in 2 minutes and leave.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap prose">
+      <h2>The stack, bottom to top</h2>
+      <pre class="tree"><b>4. The surfaces</b>   <i>email, community, social, wherever signal arrives</i>
+<b>3. The agents</b>     <i>Hermes agents running against those brains</i>
+<b>2. The ICM brain</b>  <i>numbered folders, 1 job each, on top of that memory</i>
+<b>1. Hermes</b>         <i>the agent. It remembers, and it learns</i></pre>
+      <p>
+        Hermes remembers. The folders organize. The agent walks the folders and
+        does the work.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>Recall is not structure.</strong> Memory gives you back what
+          was said. Structure gives an agent somewhere to stand and a job to do
+          when it stands there. Most people stop at recall, and then wonder why
+          the agent still sounds like it just met them.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap prose">
+      <h2>The part almost nobody talks about</h2>
+      <p>
+        Here is the question business owners actually ask, and it is never the
+        one that gets answered.
+      </p>
+      <p style="color:var(--text)">
+        They are not worried the agent cannot do the work. They are worried
+        about what it does at 3 in the morning when nobody is watching.
+      </p>
+      <p>
+        The usual answer is some version of trust it. Write a careful
+        instruction, tell the agent to ask before it sends anything, and hope
+        it holds.
+      </p>
+      <p>
+        That is a promise, not a boundary. It lives in the same place as
+        everything else the agent might get talked out of, and the agent is the
+        one enforcing it against itself.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>The honest answer is that it does not get to decide.</strong>
+          What it can reach, what it can spend, and where it can go are handed
+          to it by a layer above, and it has no way to widen them. Not because
+          it promised. Because it cannot.
+        </p>
+      </div>
+
+      <h3>The 6 jobs that layer does</h3>
+      <p>
+        None of this is new. It is how every serious company already runs its
+        own systems. The only new part is pointing it at an agent.
+      </p>
+      <div class="scroller">
+        <table>
+          <thead>
+            <tr><th>The job</th><th>Said plainly</th></tr>
+          </thead>
+          <tbody>
+            {jobs.map((j) => (
+              <tr>
+                <td style="white-space:nowrap;color:var(--accent)">{j.job}</td>
+                <td>{j.plain}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        The 6th one is the sleeper. Everybody understands backups. Almost
+        nobody thinks about the gap between what they believe is set up and
+        what is really running. Every owner has lived that already, just with
+        people instead of software: the process everyone agreed to and nobody
+        follows.
+      </p>
+
+      <h3>What each agent is handed</h3>
+      <p>From outside itself, where it cannot argue with any of it:</p>
+      <ul>
+        {given.map((g) => <li>{g}</li>)}
+      </ul>
+      <p>
+        Separate, but still part of 1 system somebody can see across. Not 1
+        assistant that can reach everything, and not 6 disconnected tools that
+        nobody is watching.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap prose">
+      <h2>Do I run this, or am I just describing it</h2>
+      <p>
+        I run it. Agents with separate jobs and separate memory. Work that
+        happens on a schedule whether or not I am at the desk. A morning packet
+        of what needs deciding. Files that show the state of the work instead
+        of a chat log I have to scroll. Proof when something publishes, so I am
+        not taking the agent's word for it.
+      </p>
+      <p>
+        It runs Ryan McKinney's BuildMarketClose framework. That is his
+        process, not mine. What is mine is the automation on top of it.
+      </p>
+
+      <div class="callout">
+        <p>
+          <strong>You will not see it on this site.</strong> The architecture
+          is the lesson and I will teach all of it. The running system stays
+          off camera, because it has other people's work inside it and they did
+          not sign up to be content. Anything I demonstrate is built for the
+          demonstration.
+        </p>
+      </div>
+      <p style="color:var(--muted)">
+        That is a real limit and it cuts against me, so it is worth saying out
+        loud rather than letting you notice it later. It means you get the
+        pattern and the reasoning, and you take my word for the rest.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap prose">
+      <h2>Who this is for</h2>
+      <p>
+        A business owner who already tried the note taking app, already has an
+        AI subscription, and is tired of explaining the same business every
+        morning. Someone who wants the work to happen while they sleep and
+        wants to know exactly what it was allowed to touch while it did.
+      </p>
+      <p>
+        It is not for someone who wants a chatbot that sounds clever. That is a
+        real thing to want. It is just not this.
+      </p>
+
+      <h2>Where to start</h2>
+      <p>
+        At the bottom. 3 folders, tonight, with nothing installed. The whole
+        stack above is built out of that 1 move repeated, and if the first step
+        does nothing for you the rest will not either.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="/start">Build 3 folders</a>
+        <a class="btn btn--ghost" href="/icm">What ICM is</a>
+        <a class="btn btn--ghost" href="/hermes">What Hermes is</a>
+      </div>
+
+      <hr />
+
+      <p>
+        ICM was named by <strong>Jake van Clief</strong>. The paper is
+        <a href={LINKS.icmPaper}>here</a> and the reference build is
+        <a href={LINKS.icmRepo}>here</a>. I did not invent it. I use it, I
+        teach it, and I build inside it.
+      </p>
+
+      <h2>When the classroom opens</h2>
+      <p>
+        My VIP classroom is where the finished builds go. It is not open yet
+        and there is nothing to buy today. Leave your email and you will hear
+        before anyone else.
+      </p>
+      <Waitlist id="thesis-waitlist" />
+    </div>
+  </section>
+</Base>

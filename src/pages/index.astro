@@ -6,29 +6,64 @@ import { BMC_LINK, LINKS, SITE } from '../config'
 
 <Base
   title={SITE.name}
-  description="Your AI forgets your business every morning. Not because you lack discipline. Because you built storage, not structure. Folders your agent can walk."
+  description="Agents that run your business out of numbered folders you can read, inside a layer that decides what they are allowed to touch. Start with 3 folders tonight, free."
   path="/"
 >
-  <section style="padding-bottom:1rem">
+  <section class="door">
     <div class="wrap">
-      <span class="badge">Interpretable Context Methodology</span>
-      <h1>Your AI asks who you are<br />every single morning</h1>
-      <p class="lede">
-        You explain your business. Your voice. Your customers. Again. You built
-        a second brain to stop doing this, and you are still doing this.
+      <span class="badge badge--accent">Hermes agents · ICM brains</span>
+      <h1 class="door-title">Agents As Folders</h1>
+      <p class="door-line">
+        Agents that run your business out of folders you can read.
       </p>
-      <p class="lede" style="color:var(--text)">
-        The problem is not your discipline. It is that you built storage, and
-        storage waits to be opened. A brain gets walked.
+      <p class="lede">
+        Not a chatbot you re-explain yourself to every morning. Numbered
+        folders hold the work, an agent walks them and does the job, and a
+        layer above it decides what it is allowed to touch.
       </p>
       <div class="btn-row">
         <a class="btn" href="/start">Build 3 folders tonight</a>
-        <a class="btn btn--ghost" href="/icm">What is ICM</a>
+        <a class="btn btn--ghost" href="/what-this-is/">What this actually is</a>
+      </div>
+      <p class="door-note">
+        Free to start, nothing to install, about 20 minutes.
+      </p>
+    </div>
+  </section>
+
+  <section class="door-stack">
+    <div class="wrap">
+      <div class="grid" style="align-items:start">
+        <div class="card">
+          <span class="door-n">01</span>
+          <h2>Folders hold the work</h2>
+          <p style="color:var(--muted);margin:0">
+            Numbered, 1 job each. The number is the order the work happens in,
+            not decoration. You can open any of them and read it yourself.
+          </p>
+        </div>
+        <div class="card">
+          <span class="door-n">02</span>
+          <h2>An agent walks them</h2>
+          <p style="color:var(--muted);margin:0">
+            It reads the folder it is standing in and does that folder's job.
+            Nobody re-explains the business to it in the morning.
+          </p>
+        </div>
+        <div class="card">
+          <span class="door-n">03</span>
+          <h2>A layer above says no</h2>
+          <p style="color:var(--muted);margin:0">
+            What it can reach and what it can spend are handed to it from
+            outside. It cannot widen them. Not because it promised, because it
+            cannot.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="what">
+  <section>
     <div class="wrap">
       <h2>An app is a place to put things</h2>
       <p style="max-width:40rem">
@@ -60,11 +95,10 @@ import { BMC_LINK, LINKS, SITE } from '../config'
     <div class="wrap">
       <div class="grid" style="align-items:start">
         <div>
-          <h2 style="font-size:1.5rem">This is the whole idea</h2>
+          <h2 style="font-size:1.5rem">What it looks like</h2>
           <p style="color:var(--muted)">
-            Numbered folders. Each one holds 1 job and the notes for that job.
-            Nothing else. The number is the order the work happens in, not
-            decoration.
+            3 folders is enough to start. Each one holds 1 job and the notes
+            for that job. Nothing else.
           </p>
           <p style="color:var(--muted)">
             Point your AI at <code
