@@ -50,7 +50,17 @@ const fullTitle = title === SITE.name ? title : `${title} · ${SITE.name}`
   <body>
     <header class="site-head">
       <div class="wrap">
-        <a class="brand" href="/">~/<span>agents-as-folders</span></a>
+        <a class="brand" href="/" aria-label="Agents as Folders home">
+          <span class="brand-mark" aria-hidden="true">
+            <img
+              src="/agents-as-folders-logo.png"
+              alt=""
+              width="1254"
+              height="1254"
+            />
+          </span>
+          <span class="brand-name">Agents as Folders</span>
+        </a>
         <nav class="site-nav" aria-label="Main">
           {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
         </nav>
