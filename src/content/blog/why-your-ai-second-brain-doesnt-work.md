@@ -74,7 +74,9 @@ You may hear it called ICM. Interpretable Context Methodology. Say the long
 version once and then forget it, because everybody just says ICM. A man named
 Jake van Clief named it.
 
-It is 1 idea: folders your agent can walk.
+It is 1 idea: folders your agent can walk. If you run Hermes, the
+[1 folder and 4 files tutorial](/blog/hermes-agent-tutorial-1-folder-4-files/)
+is that idea built for 1 real job.
 
 It sounds too simple to matter, so let me show you.
 
