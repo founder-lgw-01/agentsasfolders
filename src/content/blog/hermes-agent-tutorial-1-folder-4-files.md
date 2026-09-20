@@ -181,7 +181,7 @@ The 4 file starter template from the video is in my classroom inside Build
 Market Close. I teach there and I am an admin there. Heads up: that is an
 affiliate link, and I earn a commission if you join through it. I would point
 you there either way, because it is where I teach.
-[Build Market Close](https://www.skool.com/buildmarketclose).
+[Build Market Close](https://www.skool.com/buildmarketclose/about?ref=b4930039368a40fea726f166eb864cc1).
 
 Next on the channel: how Hermes remembers, layer by layer. This post is the
 folder. That series is the memory.
