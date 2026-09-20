@@ -1,6 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro'
 import { getCollection } from 'astro:content'
+import { LINKS } from '../../config'
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -12,6 +15,13 @@ const fmt = (d) =>
     month: 'long',
     day: 'numeric',
   })
+
+// A post's picture is a local file at public/blog/<slug>.jpg, cut from the
+// video's own thumbnail. No hotlinking. A post with no file gets no picture.
+const thumb = (slug) =>
+  existsSync(join(process.cwd(), 'public', 'blog', `${slug}.jpg`))
+    ? `/blog/${slug}.jpg`
+    : null
 ---
 
 <Base
@@ -19,38 +29,74 @@ const fmt = (d) =>
   description="Writing on ICM, Hermes, and building systems your agent can actually use."
   path="/blog"
 >
-  <section>
-    <div class="wrap">
-      <span class="badge">Blog</span>
-      <h1>Writing</h1>
-      <p class="lede">
-        ICM, Hermes, and systems your agent can actually use.
-      </p>
+  <section class="hero" style="padding-bottom:1rem">
+    <div class="wrap hero-grid">
+      <div class="hero-art">
+        <img
+          src="/agents-as-folders-logo.png"
+          alt="Agents as Folders"
+          width="1254"
+          height="1254"
+          fetchpriority="high"
+        />
+      </div>
+      <div class="hero-copy">
+        <span class="badge badge--accent">Blog</span>
+        <h1>The post behind every video</h1>
+        <p class="lede">
+          ICM, Hermes, and systems your agent can actually use. Each post is a
+          video in writing, with the real files, so you can build it tonight.
+        </p>
+        <div class="btn-row">
+          <a class="btn" href="/start">Build 3 folders tonight</a>
+          <a class="btn btn--ghost" href={LINKS.youtube}>Watch on YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section style="padding-top:1.5rem">
+    <div class="wrap">
       {posts.length === 0 && (
-        <p style="color:var(--muted);margin-top:2rem">
+        <p style="color:var(--muted)">
           Nothing published yet. The first post is being written.
         </p>
       )}
 
-      <div style="margin-top:3rem;display:grid;gap:1.25rem">
-        {posts.map((post) => (
-          <a
-            href={`/blog/${post.slug}/`}
-            class="card"
-            style="text-decoration:none;display:block"
-          >
-            <p
-              style="color:var(--muted);font-size:0.8rem;margin:0 0 0.5rem;font-family:var(--mono)"
-            >
-              {fmt(post.data.date)}
-            </p>
-            <h2 style="font-size:1.35rem;margin:0 0 0.5rem;color:var(--text)">
-              {post.data.title}
-            </h2>
-            <p style="color:var(--muted);margin:0">{post.data.description}</p>
-          </a>
-        ))}
+      <div class="post-grid">
+        {posts.map((post) => {
+          const img = thumb(post.slug)
+          return (
+            <a href={`/blog/${post.slug}/`} class="card post-card">
+              {img && (
+                <img
+                  src={img}
+                  alt={post.data.title}
+                  width="1280"
+                  height="720"
+                  loading="lazy"
+                />
+              )}
+              <div class="post-card-body">
+                <p class="post-meta">
+                  <span>{fmt(post.data.date)}</span>
+                  {post.data.video && <span class="badge post-badge">Video</span>}
+                </p>
+                <h2>{post.data.title}</h2>
+                <p class="post-desc">{post.data.description}</p>
+                <p class="post-read">Read it</p>
+              </div>
+            </a>
+          )
+        })}
+      </div>
+
+      <div class="callout" style="margin-top:3rem">
+        <p>
+          <strong>New here?</strong> Do not read more about it. Make 3 folders
+          and point your agent at 1 of them. <a href="/start">The 3 folder start</a>
+          is free and takes about 20 minutes.
+        </p>
       </div>
     </div>
   </section>
