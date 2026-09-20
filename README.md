@@ -42,6 +42,10 @@ sources:              # optional, renders a list at the bottom
 ---
 ```
 
+For a picture on the blog index card, drop a 1280x720 `.jpg` at
+`public/blog/<slug>.jpg`, the same name as the post. A video post uses the
+video's own thumbnail. No file, no picture. Nothing is hotlinked.
+
 Commit. Cloudflare builds it. `draft: true` posts still render in `npm run dev`.
 
 ## Deploy
