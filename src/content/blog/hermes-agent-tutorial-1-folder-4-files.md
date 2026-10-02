@@ -34,7 +34,8 @@ It also keeps chat history, and it can use deeper memory tools. None of that is
 a clear record of 1 job. Not this week's task, and not what you decided last
 week. That is the design, not a fault. The official page on
 [persistent memory](https://hermes-agent.nousresearch.com/docs/user-guide/features/memory)
-says the same thing in more words.
+says the same thing in more words. I walk every layer of it, live, in
+[how Hermes keeps your AI agent memory on your own machine](/blog/ai-agent-memory-hermes/).
 
 [Here is that part of the video](https://www.youtube.com/watch?v=q3libDrhXpM&t=31s).
 

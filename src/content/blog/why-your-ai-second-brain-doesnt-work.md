@@ -53,6 +53,8 @@ You did not build a brain. You built storage. And those are not the same thing.
 Storage is a place you put things. It sits there. It waits to be opened. It
 does nothing until you go and get it. That is a filing cabinet, and a good one.
 Filing cabinets are useful. I own several. But a filing cabinet is not a brain.
+The same goes for AI memory you can't open. Here is
+[where your AI agent memory actually lives](/blog/ai-agent-memory-hermes/), and how to keep it.
 
 So what is?
 
